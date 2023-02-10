@@ -17,16 +17,16 @@
 
 <main>
 	<!-- a form -->
-	<h1 class="mx-auto w-min my-4 text-2xl">Login</h1>
+	<h1 class="mx-auto w-fit font-bold my-4 text-4xl">Sign In</h1>
 	<form
 		method="POST"
 		use:enhance={handleSubmit}
 		class="max-w-md form-control bg-neutral-100 mx-auto rounded shadow-xl p-8"
 	>
 		<!-- an input for email -->
-		<input class="input my-4" type="email" name="email" placeholder="Email" />
+		<input class="input my-4" type="email" name="email" required placeholder="Email" />
 		<!-- a submit button -->
-		<button disabled={loading} type="submit" class="btn btn-secondary my-2">Login</button>
+		<button disabled={loading} type="submit" class="btn btn-secondary my-2">Send</button>
 	</form>
 	{#if form?.success}
 		<div class="alert max-w-md mx-auto alert-success shadow-lg">

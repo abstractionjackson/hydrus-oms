@@ -4,7 +4,7 @@ import type { Handle } from './$types';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { redirect, error } from '@sveltejs/kit';
 
-const protectedRoutes = ['/profile'];
+const protectedRoutes = ['/patients'];
 
 const isProtectedRoute = (pathname: string) => {
 	return protectedRoutes.some((route) => pathname.startsWith(route));

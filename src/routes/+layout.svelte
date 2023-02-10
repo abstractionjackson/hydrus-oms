@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import logo from './logo.png';
+	import SignOutBtn from '$lib/components/SignOutBtn.svelte';
 
 	onMount(() => {
 		const {
@@ -29,10 +30,14 @@
 		</a>
 		{#if !$page.data.session}
 			<!-- login button -->
-			<a href="/login" class="btn btn-accent ml-auto mx-4">Login</a>
+			<a href="/login" class="btn btn-accent ml-auto mx-4">Sign In</a>
 		{:else}
-			<!-- profile button -->
-			<a href="/profile" class="btn btn-accent ml-auto mx-4">Profile</a>
+			<!-- link to patients page -->
+			<a href="/patients" class="font-semibold text-neutral-100 mx-4">Patients</a>
+			<!-- sign out button -->
+			<div class="ml-auto mx-4">
+				<SignOutBtn />
+			</div>
 		{/if}
 	</nav>
 	<!-- Content -->
