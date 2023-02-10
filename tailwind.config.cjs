@@ -5,7 +5,11 @@ const config = {
 		colors: {
 			blue: '#013595'
 		},
-		extend: {}
+		extend: {
+			backgroundImage: {
+				home: "url('images/bg_home.avif')"
+			}
+		}
 	},
 
 	plugins: [require('daisyui')],

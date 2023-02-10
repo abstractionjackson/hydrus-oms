@@ -9,11 +9,11 @@
 	};
 </script>
 
-<main>
-	<h1>Profile</h1>
+<main class="mx-auto text-center mt-8">
+	<h2 class="font-bold text-xl my-4">Profile</h2>
 	{#if $page.data.session}
 		<p>Welcome, {$page.data.session.user.email}</p>
 	{/if}
 	<!-- logout button -->
-	<button class="btn btn-primary" on:click={handleLogout}>Logout</button>
+	<button class="btn btn-primary my-4" on:click={handleLogout}>Logout</button>
 </main>
