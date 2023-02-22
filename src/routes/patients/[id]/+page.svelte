@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import OperationForm from './OperationForm.svelte';
+	import ReadingChart from './ReadingChart.svelte';
 	import ReadingForm from './ReadingForm.svelte';
 
 	export let data: PageData;
@@ -14,7 +15,7 @@
 		<h3>Loading...</h3>
 	{:else}
 		<!-- a card with the patient's details -->
-		<div class="card mx-auto card-bordered max-w-fit text-center">
+		<div class="card mx-auto card-bordered max-w-fit text-left">
 			<div class="card-body">
 				<!-- patient's name -->
 				<h3 class="card-title">
@@ -23,53 +24,24 @@
 				</h3>
 				<!-- patient's dob -->
 				<p class="card-subtitle text-gray-500">DOB: {data.patient.dob}</p>
-				<!-- the patient's operation history -->
-				<h4 class="card-title">Operation History</h4>
+				<!-- the patient's operation date -->
 				{#if !data.operation}
 					<p class="card-subtitle text-gray-500">No operations</p>
 				{:else}
-					<table class="table mx-auto">
-						<!-- columnss: id, and date -->
-						<thead>
-							<tr>
-								<th />
-								<th>Date</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each data.operation as { date }, i}
-								<tr>
-									<td><a class="link" href={`operations/${i}`}>{i}</a></td>
-									<td>{date}</td>
-								</tr>
-							{/each}
-						</tbody>
-					</table>
+					<p class="card-subtitle text-gray-500">
+						Operation Date: {data.operation[0].date}
+					</p>
 				{/if}
+				<hr />
 				<!-- the patient's reading history -->
 				<h4 class="card-title">Reading History</h4>
 				{#if !data.readings}
 					<p class="card-subtitle text-gray-500">No readings</p>
 				{:else}
-					<table class="table mx-auto">
-						<!-- columns: id, date, and psi -->
-						<thead>
-							<tr>
-								<th />
-								<th>Date</th>
-								<th>Pressure (psi)</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each data.readings as { date, psi }, i}
-								<tr>
-									<td><a class="link" href={`readings/${i}`}>{i}</a></td>
-									<td>{date}</td>
-									<td>{psi}</td>
-								</tr>
-							{/each}
-						</tbody>
-					</table>
+					<!-- a chart of the readings -->
+					<div class="container min-w-[720px]">
+						<ReadingChart readings={data.readings} />
+					</div>
 				{/if}
 			</div>
 		</div>
