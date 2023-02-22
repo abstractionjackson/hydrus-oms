@@ -1,21 +1,20 @@
 import '$lib/db';
 // src/hooks.server.ts
-import type { Handle } from './$types';
+import type { RequestHandler } from './$types';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { redirect, error } from '@sveltejs/kit';
 
-const protectedRoutes = ['/patients'];
+const protectedRoutes = ['/patients', '/outcomes'];
 
 const isProtectedRoute = (pathname: string) => {
 	return protectedRoutes.some((route) => pathname.startsWith(route));
 };
 
-export const handle: Handle = async ({ event, resolve }) => {
+export const handle: RequestHandler = async ({ event, resolve }) => {
 	// protect requests to all routes that start with /protected-routes
+	const { session, supabaseClient } = await getSupabase(event);
 	const { pathname } = event.url;
 	if (isProtectedRoute(pathname)) {
-		const { session, supabaseClient } = await getSupabase(event);
-
 		if (!session) {
 			throw redirect(303, '/');
 		}
