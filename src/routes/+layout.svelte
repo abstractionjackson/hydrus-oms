@@ -32,9 +32,6 @@
 			<!-- login button -->
 			<a href="/login" class="btn btn-accent ml-auto mx-4">Sign In</a>
 		{:else}
-			<!-- link to patients page -->
-			<a href="/patients" class="font-semibold text-neutral-100 mx-4">Patients</a>
-			<!-- sign out button -->
 			<div class="ml-auto mx-4">
 				<SignOutBtn />
 			</div>
