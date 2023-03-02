@@ -2,21 +2,7 @@ import type { Actions } from './$types';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 
 export const actions = {
-	operation: async (event) => {
-		const data = await event.request.formData();
-		const date = data.get('date');
-		const patient_id = data.get('patient_id');
-		// insert to the operation table
-		try {
-			const { supabaseClient } = await getSupabase(event);
-			const { data, error } = await supabaseClient.from('operation').insert({ date, patient_id });
-			return { success: true };
-		} catch (error) {
-			console.error(error);
-			return { success: false };
-		}
-	},
-	reading: async (event) => {
+		reading: async (event) => {
 		const data = await event.request.formData();
 		const date = data.get('date');
 		const patient_id = data.get('patient_id');
@@ -31,5 +17,20 @@ export const actions = {
 			console.error(error);
 			return { success: false };
 		}
+	},
+	update: async (event) => {
+		console.log('Updating Patient');
+
+		const data = await event.request.formData();
+
+		const value = data.get('name_first');
+
+		console.log('Value', value);
+	},
+	test: async (event) => {
+		console.log('Test Action');
+		const data = await event.request.formData();
+		const test = data.get('foo');
+		console.log('Input value', test);
 	}
 } satisfies Actions;

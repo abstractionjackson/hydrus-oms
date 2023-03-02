@@ -19,8 +19,8 @@
 			<h1 class="text-4xl break-words my-4 font-bold text-black">
 				Welcome back, {data.session.user.email}!
 			</h1>
-			<a href="/patients/new" class="btn btn-accent">New Patient</a>
-			<a href="/patients" class="btn btn-primary">View Patients</a>
+			<a href="/patient/new" class="btn btn-accent">New Patient</a>
+			<a href="/patient" class="btn btn-primary">View Patients</a>
 		</div>
 	{/if}
 </main>
