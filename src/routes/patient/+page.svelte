@@ -3,8 +3,6 @@
 
 	export let data: PageData;
 
-	const title: string = 'Patient List';
-
 	const sortFunctions = {
 		name_last: (a, b) => a.name_last.localeCompare(b.name_last),
 		name_first: (a, b) => a.name_first.localeCompare(b.name_first),
@@ -24,13 +22,13 @@
 		}
 	};
 
-	$: patients = !reverse
-		? data.patients?.sort(sortFunctions[activeSortFunctionKey])
-		: data.patients?.sort(sortFunctions[activeSortFunctionKey]).reverse();
+	$: patientList = !reverse
+		? data.patientList?.sort(sortFunctions[activeSortFunctionKey])
+		: data.patientList?.sort(sortFunctions[activeSortFunctionKey]).reverse();
 </script>
 
 <main class="text-center">
-	<h2 class="text-4xl font-bold my-4">{title}</h2>
+	<h2 class="text-4xl font-bold my-4">{data.title}</h2>
 	<div class="flex">
 		<table class="table mx-auto">
 			<thead class:reverse>
@@ -60,7 +58,7 @@
 					>
 				</tr>
 			</thead>
-			{#each patients as patient}
+			{#each patientList as patient}
 				<tr>
 					<td><a class="link" href={`patient/${patient.id}`}>{patient.id}</a></td>
 					<td>{patient.name_last}</td>

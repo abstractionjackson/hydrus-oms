@@ -1,6 +1,7 @@
 <script>
 	import '../app.postcss';
 	import { supabase } from '$lib/db';
+	import { routeTitles } from '$lib/constants';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
@@ -26,13 +27,14 @@
 	<nav class="h-16 shadow bg-blue flex items-center">
 		<!-- Logo -->
 		<a href="/">
-			<img src={logo} alt="logo" class="mt-3 mr-3 h-12 ml-8" />
+			<img src={logo} alt="logo" class="mt-3 h-12 ml-8" />
 		</a>
 		{#if !$page.data.session}
 			<!-- login button -->
 			<a href="/login" class="btn btn-accent ml-auto mx-4">Sign In</a>
 		{:else}
-			<a href="/patient" class="text-neutral-100">Patient List</a>
+			<a href="/patient" class="text-neutral-100 mx-3">{routeTitles['/patient']}</a>
+			<a href="/outcome" class="text-neutral-100 mx-3">{routeTitles['/outcome']}</a>
 			<div class="ml-auto mx-4">
 				<SignOutBtn />
 			</div>

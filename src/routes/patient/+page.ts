@@ -1,17 +1,18 @@
+import { routeTitles as titles } from '$lib/constants';
 import type { PageLoad } from './$types';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 
 export const load = (async (event) => {
-	try {
-		const { session, supabaseClient } = await getSupabase(event);
-		const { data, error } = await supabaseClient.from('patient').select('*');
-		if (error) {
-			console.error(error);
-			return { success: false };
-		}
-		return { success: true, patients: data };
-	} catch (error) {
-		console.error(error);
-		return { success: false };
+	let data = {
+		title: titles[event.route.id]
+	};
+	const { session, supabaseClient } = await getSupabase(event);
+	const result = await supabaseClient.from('patient').select('*');
+	if (result.error) {
+		console.error(result.error);
+		data = { ...data, success: false };
+	} else {
+		data = { ...data, success: true, patientList: result.data };
 	}
-}) satisfies PageServerLoad;
+	return data;
+}) satisfies PageLoad;
