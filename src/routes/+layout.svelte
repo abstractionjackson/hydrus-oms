@@ -22,7 +22,7 @@
 </script>
 
 <!-- Layout -->
-<div id="layout" class="flex flex-col min-h-screen">
+<div id="layout" class="flex flex-col min-h-screen bg-neutral-100">
 	<!-- Navbar -->
 	<nav class="h-16 shadow bg-blue flex items-center">
 		<!-- Logo -->
