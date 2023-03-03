@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import type { PageData } from '../$types';
 
 	export let data: PageData;
@@ -59,8 +60,8 @@
 				</tr>
 			</thead>
 			{#each patientList as patient}
-				<tr>
-					<td><a class="link" href={`patient/${patient.id}`}>{patient.id}</a></td>
+				<tr class="hover cursor-pointer" on:click={() => goto(`/patient/${patient.id}`)}>
+					<td>{patient.id}</td>
 					<td>{patient.name_last}</td>
 					<td>{patient.name_first}</td>
 					<td>{new Date(Date.parse(patient.dob)).toLocaleDateString()}</td>
