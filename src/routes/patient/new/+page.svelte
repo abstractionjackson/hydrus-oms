@@ -30,7 +30,7 @@
 		<input
 			type="text"
 			placeholder="First Name"
-			class="border-2 border-gray-300 p-2 my-2"
+			class="border-2 border-gray-300 p-2 my-2 rounded"
 			name="name_first"
 			required
 		/>
@@ -38,7 +38,7 @@
 		<input
 			type="text"
 			placeholder="Last Name"
-			class="border-2 border-gray-300 p-2 my-2"
+			class="border-2 border-gray-300 p-2 my-2 rounded"
 			name="name_last"
 			required
 		/>
@@ -47,7 +47,7 @@
 		<input
 			type="date"
 			placeholder="Date of Birth"
-			class="border-2 border-gray-300 p-2 my-2"
+			class="border-2 border-gray-300 p-2 my-2 rounded"
 			name="dob"
 			required
 		/>
@@ -58,7 +58,7 @@
 		<input
 			type="date"
 			placeholder="Operation Date"
-			class="border-2 border-gray-300 p-2 my-2"
+			class="border-2 border-gray-300 p-2 my-2 rounded"
 			name="operation_date"
 		/>
 		<!-- submit button -->

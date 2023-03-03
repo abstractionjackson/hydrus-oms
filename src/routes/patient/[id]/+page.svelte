@@ -35,12 +35,14 @@
 			<!-- patient demo ifo -->
 			<table class="mx-4 table">
 				<thead>
-					<th>Name</th>
+					<th>Last Name</th>
+					<th>First Name</th>
 					<th>Date of Birth</th>
 				</thead>
 				<tbody>
-					<tr
-						><td>{name_last}, {name_first}</td>
+					<tr>
+						<td>{name_last}</td>
+						<td>{name_first}</td>
 						<td>{new Date(Date.parse(dob)).toLocaleDateString()}</td></tr
 					>
 				</tbody>
