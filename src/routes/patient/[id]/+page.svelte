@@ -9,7 +9,25 @@
 </script>
 
 <main class="text-center">
-	<h2 class="text-4xl font-bold my-4">Patient Details</h2>
+	<heading class="flex mx-auto items-center justify-center">
+		<a href="/patient" class="mx-4"
+			><svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke-width="1.5"
+				stroke="currentColor"
+				class="w-6 h-6"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+				/>
+			</svg>
+		</a>
+		<h2 class="text-4xl font-bold my-4">Patient Details</h2>
+	</heading>
 	{#if !patient}
 		<h3>Loading...</h3>
 	{:else}
