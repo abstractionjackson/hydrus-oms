@@ -1,4 +1,4 @@
 export const routeTitles = {
 	'/patient': 'Patients',
-	'/outcome': 'Outcomees'
+	'/outcome': 'Outcomes'
 };
