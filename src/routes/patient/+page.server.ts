@@ -10,6 +10,10 @@ export const actions = {
 		const operation_date = formData.get('operation_date');
 		try {
 			const { session, supabaseClient } = await getSupabase(event);
+			if (session === null) {
+				console.log('No valid session');
+				return { success: false };
+			}
 			// create a patient record
 			const { data, error } = await supabaseClient
 				.from('patient')
