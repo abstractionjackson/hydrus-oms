@@ -15,7 +15,7 @@
 	export let data: import('../$types').PageServerData;
 	const lineData = {
 		datasets: data.readingList
-			.filter(({ psi }) => 10000 > psi)
+			.filter(({ oir }) => 10000 > oir)
 			.reduce((acc, cv) => {
 				const patient = acc.find((item) => item.id === cv.patient_id);
 				if (patient !== undefined) {
@@ -29,7 +29,7 @@
 				label: patient.id,
 				data: patient.readings.map((reading) => ({
 					x: reading.date,
-					y: reading.psi
+					y: reading.oir
 				}))
 			}))
 	};
@@ -39,7 +39,7 @@
 				type: 'time'
 			},
 			y: {
-				title: { text: 'PSI', display: true },
+				title: { text: 'oir', display: true },
 				min: 0,
 				max: 100
 			}

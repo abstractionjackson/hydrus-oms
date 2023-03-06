@@ -5,13 +5,13 @@
 	// sort the readings by date
 	readings.sort((a, b) => a.date.localeCompare(b.date));
 
-	const title = 'PSI by Date';
+	const title = 'oir by Date';
 	const colors = ['#38CDBE'];
 	let data = {
 		labels: readings.map((r) => r.date),
 		datasets: [
 			{
-				values: readings.map((r) => r.psi)
+				values: readings.map((r) => r.oir)
 			}
 		]
 	};
