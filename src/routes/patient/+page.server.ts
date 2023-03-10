@@ -1,3 +1,4 @@
+import { fail } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 
@@ -30,10 +31,10 @@ export const actions = {
 					.insert({ operation_date, patient_id: id });
 				if (response.error) {
 					console.error('Error creating operation record', response.error);
-					return { success: false };
+					return fail(400);
 				}
 			}
-			return { success: true, id };
+			return { id };
 		} catch (error) {
 			console.error(error);
 			return { success: false };

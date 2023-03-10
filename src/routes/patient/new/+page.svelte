@@ -11,8 +11,9 @@
 			loading = false;
 			if (result.type === 'success') {
 				const { id } = result.data;
-				goto(`/patient/${id}`);
+				return goto(`/patient/${id}`);
 			}
+			alert('Add Patient Error');
 		};
 	};
 </script>
@@ -51,7 +52,7 @@
 			name="dob"
 			required
 		/>
-		<!-- operation date -->
+		<!-- operation date
 		<label for="operation_date"
 			>Operation Date <span class="text-sm text-neutral-400">optional</span></label
 		>
@@ -60,7 +61,7 @@
 			placeholder="Operation Date"
 			class="border-2 border-gray-300 p-2 my-2 rounded"
 			name="operation_date"
-		/>
+		/> -->
 		<!-- submit button -->
 		<button type="submit" disabled={loading} class="btn btn-primary">Submit</button>
 	</form>
