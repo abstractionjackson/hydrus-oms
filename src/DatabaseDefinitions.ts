@@ -42,7 +42,7 @@ export interface Database {
           id: number
           name_first: string | null
           name_last: string | null
-          od_os: string | null
+          od_os: string[]
           pre_op_iop: number
           pre_op_meds_count: number
           user: string | null
@@ -54,7 +54,7 @@ export interface Database {
           id?: number
           name_first?: string | null
           name_last?: string | null
-          od_os?: string | null
+          od_os: string[]
           pre_op_iop?: number
           pre_op_meds_count?: number
           user?: string | null
@@ -66,7 +66,7 @@ export interface Database {
           id?: number
           name_first?: string | null
           name_last?: string | null
-          od_os?: string | null
+          od_os?: string[]
           pre_op_iop?: number
           pre_op_meds_count?: number
           user?: string | null
