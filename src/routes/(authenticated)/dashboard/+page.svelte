@@ -8,7 +8,6 @@
 
     const { url } = $page;
 
-    console.log(url.searchParams)
     let redirectFrom = url.searchParams.get('redirectFrom')
     let patient_id: string;
     let patient_name_last: string;
