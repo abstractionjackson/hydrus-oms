@@ -29,6 +29,10 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@picocss/pico": "^1.5.10"
+		"@picocss/pico": "^1.5.10",
+		"@supabase/auth-helpers-sveltekit": "^0.9.4",
+		"@supabase/auth-ui-shared": "^0.1.4",
+		"@supabase/auth-ui-svelte": "^0.1.6",
+		"@supabase/supabase-js": "^2.21.0"
 	}
 }
