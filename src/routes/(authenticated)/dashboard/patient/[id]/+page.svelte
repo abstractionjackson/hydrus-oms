@@ -1,18 +1,13 @@
 <script lang="ts">
-    import type { PageServerData } from "./$types"
+    import Breadcrumb from "$lib/components/Breadcrumb.svelte";
+import type { PageServerData } from "./$types"
     export let data: PageServerData
     const { patient } = data;
 </script>
 
 <main class="container-fluid">
     <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="/dashboard">Dashboard</a>
-                </li>
-            </ul>
-        </nav>
+        <Breadcrumb />
     </header>
     <section>
         <article>
@@ -58,9 +53,6 @@
 <style>
     main {
         padding: 1rem;
-    }
-    header > nav > ul > li::before {
-        content: "\\  ";
     }
     article {
         margin: auto;

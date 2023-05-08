@@ -1,10 +1,18 @@
+<script>
+
+	import Breadcrumb from "$lib/components/Breadcrumb.svelte";
+
+</script>
 
 <!-- form that accepts patient demo information -->
 <main class="container-fluid">
     <header>
-        <h2>New Patient</h2>
+        <Breadcrumb />
     </header>
     <section>
+        <header>
+            <h2>New Patient</h2>
+        </header>
         <form action="?/create" method="post">
             <!-- fields for creating a new patient -->
             <label for="name_last">Last Name</label>
@@ -47,9 +55,8 @@
         flex-direction: column;
         justify-content: center;
     }
-    header {
-        width: fit-content;
-        margin: auto;   
+    h2 {
+        text-align: center;
     }
     .input-group {
         display: flex;
