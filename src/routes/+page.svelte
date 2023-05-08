@@ -24,6 +24,15 @@
 </style>
 <main class="container-fluid">
     <section>
+        <article>
+            <header>
+                <h2>Sign In</h2>
+            </header>
+            <form action="?/signin" method="post">
+                <input type="email" name="email" placeholder="Email" />
+                <input type="submit" value="Send Link" />
+            </form>
+        </article>
         {#if form?.success}
         <article class="flash">
             <span class="icon success icon-sm">
@@ -36,14 +45,5 @@
             </span>
         </article>
         {/if}
-        <article>
-            <header>
-                <h2>Sign In</h2>
-            </header>
-            <form action="?/signin" method="post">
-                <input type="email" name="email" placeholder="Email" />
-                <input type="submit" value="Send Link" />
-            </form>
-        </article>
     </section>
 </main>
