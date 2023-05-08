@@ -13,6 +13,11 @@
         margin: auto;
         max-width: var(--form-max-width);
     }
+    article {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
 <main class="container-fluid">
     <section>
