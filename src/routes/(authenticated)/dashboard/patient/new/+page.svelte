@@ -37,8 +37,19 @@
 </main>
 
 <style>
+    form {
+        margin: auto;
+        max-width: var(--form-max-width);
+    }
     main {
         padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    header {
+        width: fit-content;
+        margin: auto;   
     }
     .input-group {
         display: flex;
