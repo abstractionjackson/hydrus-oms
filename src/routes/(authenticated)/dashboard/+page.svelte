@@ -23,9 +23,13 @@
     <header>
         <a href="/dashboard/patient/new">Add Patient</a>
         {#if redirectFrom === 'patient/new'}
-            <article>
-                <h4>Create Patient Success</h4>
-                <p>Go to <a href={`/dashboard/patient/${patient_id}`}>{patient_name_last}, {patient_name_first}</a></p>
+            <article class="flash">
+                <span class="icon success icon-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="auto" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>  
+                </span>
+            <span class="flash message"><a href={`/dashboard/patient/${patient_id}`}>{patient_name_last}, {patient_name_first}</a><span>&nbsp;created</span></span>
             </article>
         {/if}
     </header>
@@ -42,3 +46,9 @@
         </ul>
     </section>
 </main>
+
+<style>
+    main {
+        padding: 2rem 1rem;
+    }
+</style>

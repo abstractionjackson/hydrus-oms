@@ -1,0 +1,23 @@
+/* declare a max-width variable for forms */
+:root {
+    --form-max-width: 600px;
+    --color-success: #28a745;
+}
+
+.flash {
+    display: flex;
+    align-items: center;
+}
+.flash.message {
+    margin: 0 0.5em;
+}
+.icon.success {
+    color: var(--color-success);
+}
+.icon-sm > svg {
+    /* svg wrapper */
+    width: 1em;
+    height: 1em;
+    display: flex;
+    align-items: center;
+}

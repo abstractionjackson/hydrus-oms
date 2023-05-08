@@ -1,16 +1,4 @@
-<style>
-    .input-group {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 16px;
-    }
-    .checkbox-group {
-        flex-direction: row;
-    }
-    #od_os {
-        margin-bottom: 4px;
-    }
-</style>
+
 <!-- form that accepts patient demo information -->
 <main class="container-fluid">
     <header>
@@ -46,4 +34,21 @@
             <input type="submit" value="Submit">
         </form>
     </section>
-    </main>
+</main>
+
+<style>
+    main {
+        padding: 2rem 1rem;
+    }
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
+    }
+    .checkbox-group {
+        flex-direction: row;
+    }
+    #od_os {
+        margin-bottom: 4px;
+    }
+</style>

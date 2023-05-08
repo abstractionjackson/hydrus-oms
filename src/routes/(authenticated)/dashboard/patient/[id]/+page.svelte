@@ -4,49 +4,81 @@
     const { patient } = data;
 </script>
 
-<style>
-    table tr td:first-child {
-        font-weight: 700;
-        background-color: #f4f4f4;
-    }
-</style>
-
 <main class="container-fluid">
     <header>
-        <h2>Patient Detail</h2>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/dashboard">Dashboard</a>
+                </li>
+            </ul>
+        </nav>
     </header>
     <section>
-        <table>
-            <tbody>
-                <tr>
-                    <td>Last Name</td>
-                    <td>{patient.name_last}</td>
-                </tr>
-                <tr>
-                    <td>First Name</td>
-                    <td>{patient.name_first}</td>
-                </tr>
-                <tr>
-                    <td>D.O.B.</td>
-                    <td>{patient.dob}</td>
-                </tr>
-                <tr>
-                    <td>Case Date</td>
-                    <td>{patient.case_date}</td>
-                </tr>
-                <tr>
-                    <td>OD/OS</td>
-                    <td>{patient.od_os}</td>
-                </tr>
-                <tr>
-                    <td>Pre-Op IOP</td>
-                <td>{patient.pre_op_iop}</td>
-                </tr>
-                <tr>
-                    <td>Pre-Op Meds</td>
-                    <td>{patient.pre_op_meds_count}</td>
-                </tr>
-            </tbody>
-        </table>
+        <article>
+            <header>
+                <h2>Patient Detail</h2>
+            </header>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Last Name</td>
+                        <td>{patient.name_last}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name</td>
+                        <td>{patient.name_first}</td>
+                    </tr>
+                    <tr>
+                        <td>D.O.B.</td>
+                        <td>{patient.dob}</td>
+                    </tr>
+                    <tr>
+                        <td>Case Date</td>
+                        <td>{patient.case_date}</td>
+                    </tr>
+                    <tr>
+                        <td>OD/OS</td>
+                        <td>{patient.od_os}</td>
+                    </tr>
+                    <tr>
+                        <td>Pre-Op IOP</td>
+                    <td>{patient.pre_op_iop}</td>
+                    </tr>
+                    <tr>
+                        <td>Pre-Op Meds</td>
+                        <td>{patient.pre_op_meds_count}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
     </section>
 </main>
+
+<style>
+    main {
+        padding: 1rem;
+    }
+    header > nav > ul > li::before {
+        content: "\\  ";
+    }
+    article {
+        margin: auto;
+        max-width: 600px;
+    }
+    header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    h2 {
+        margin: auto;
+    }
+    table {
+        margin: auto;
+        width:fit-content;
+    }
+    table tr td:first-child {
+        font-weight: 700;
+    }
+</style>
