@@ -14,10 +14,13 @@
 .icon.success {
     color: var(--color-success);
 }
+
 .icon-sm > svg {
-    /* svg wrapper */
     width: 1em;
     height: 1em;
-    display: flex;
-    align-items: center;
+}
+
+.icon-md > svg {
+    width: 2em;
+    height: 2em;
 }

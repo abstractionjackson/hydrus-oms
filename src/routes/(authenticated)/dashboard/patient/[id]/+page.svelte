@@ -10,6 +10,7 @@ import type { PageServerData } from "./$types"
         <Breadcrumb />
     </header>
     <section>
+        {#if patient}
         <article>
             <header>
                 <h2>Patient Detail</h2>
@@ -47,6 +48,13 @@ import type { PageServerData } from "./$types"
                 </tbody>
             </table>
         </article>
+        {:else}
+        <article>
+            <header>
+                <h2>Patient Not Found</h2>
+            </header>
+        </article>
+        {/if}
     </section>
 </main>
 
