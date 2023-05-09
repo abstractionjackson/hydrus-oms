@@ -19,7 +19,7 @@
 		<section class="container-fluid">
 			<article class="container-fluid">
 				<header>
-					<h3>IOP by Date</h3>
+					<h3>IOP and Meds</h3>
 				</header>
 				<PatientReadingGraph {patient} />
 			</article>
