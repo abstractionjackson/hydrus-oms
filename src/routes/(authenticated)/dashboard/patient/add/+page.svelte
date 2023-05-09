@@ -11,7 +11,7 @@
     </header>
     <section>
         <header>
-            <h2>New Patient</h2>
+            <h2>Add Patient</h2>
         </header>
         <form action="?/create" method="post">
             <!-- fields for creating a new patient -->

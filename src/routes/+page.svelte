@@ -4,24 +4,6 @@
     export let form: ActionData
 </script>
 
-<style>
-    h2 {
-        width: fit-content;
-        margin: auto;
-    }
-    form {
-        margin: auto;
-        max-width: var(--form-max-width);
-    }
-    article {
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .icon-sm > svg {
-        width: 1em;
-    }
-</style>
 <main class="container-fluid">
     <section>
         <article>
@@ -47,3 +29,22 @@
         {/if}
     </section>
 </main>
+
+<style>
+    h2 {
+        width: fit-content;
+        margin: auto;
+    }
+    form {
+        margin: auto;
+        max-width: var(--form-max-width);
+    }
+    article {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .icon-sm > svg {
+        width: 1em;
+    }
+</style>
