@@ -39,7 +39,7 @@
 	}
 	section {
 		margin: auto;
-		max-width: var(--form-max-width);
+		max-width: 360px;
 	}
 	article {
 		max-width: 600px;

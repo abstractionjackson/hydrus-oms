@@ -11,9 +11,13 @@
 		<input type="password" name="password" placeholder="Password" required />
 		<input type="submit" value="Sign In" />
 	</form>
-	<footer>
-		<p>
-			Don't have an account? <a href={signUpPath}>Sign Up</a>
-		</p>
-	</footer>
+	<p>
+		Don't have an account? <a href={signUpPath}>Sign Up</a>
+	</p>
 </article>
+
+<style>
+	article > header > h2 {
+		margin: 0;
+	}
+</style>
