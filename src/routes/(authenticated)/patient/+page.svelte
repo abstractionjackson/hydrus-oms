@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import type { PageData } from './$types';
+	import PatientList from '$lib/components/patient/PatientList.svelte';
+	import type { PageData } from '../patient/$types';
 
 	export let data: PageData;
 
@@ -20,40 +21,7 @@
 </script>
 
 <main class="container-fluid">
-	<section>
-		<article>
-			<header>
-				<h2>My Patients</h2>
-			</header>
-			<ul>
-				{#each patients as patient}
-					<li>
-						<a href="/dashboard/patient/{patient.id}">
-							<span>{patient.name_last}, </span><span>{patient.name_first}</span>
-						</a>
-					</li>
-				{/each}
-			</ul>
-			<footer>
-				<a href="/dashboard/patient/add" class="icon-md"
-					><svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="w-6 h-6"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-						/>
-					</svg>
-				</a>
-			</footer>
-		</article>
-	</section>
+	<PatientList {patients} />
 	{#if redirectFrom === 'patient/add'}
 		<section>
 			<article class="flash">
@@ -75,8 +43,9 @@
 					</svg>
 				</span>
 				<span class="flash message"
-					><a href={`/dashboard/patient/${patient_id}`}>{patient_name_last}, {patient_name_first}</a
-					><span>&nbsp;created</span></span
+					><a href={`/patient/${patient_id}`}>{patient_name_last}, {patient_name_first}</a><span
+						>&nbsp;created</span
+					></span
 				>
 			</article>
 		</section>

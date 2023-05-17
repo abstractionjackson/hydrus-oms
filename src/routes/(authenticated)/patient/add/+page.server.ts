@@ -38,7 +38,7 @@ export const actions = {
 		}
 		throw redirect(
 			303,
-			`/dashboard?redirectFrom=patient/add&id=${data.id}&name_last=${data.name_last}&name_first=${data.name_first}`
+			`/patient?redirectFrom=patient/add&id=${data.id}&name_last=${data.name_last}&name_first=${data.name_first}`
 		);
 	}
 } satisfies Actions;

@@ -24,6 +24,6 @@ export const actions = {
 		if (error) {
 			console.error(error);
 		}
-		throw redirect(303, `/dashboard/patient/${id}`);
+		throw redirect(303, `/patient/${id}`);
 	}
 } satisfies Action;
