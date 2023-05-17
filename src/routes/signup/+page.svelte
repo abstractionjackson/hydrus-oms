@@ -10,14 +10,7 @@
 	{#if form?.success}
 		<Toast type="success" {message} />
 	{/if}
-	<section>
+	<section class="page container">
 		<SignUp />
 	</section>
 </main>
-
-<style>
-	section {
-		max-width: 360px;
-		margin: 0 auto;
-	}
-</style>

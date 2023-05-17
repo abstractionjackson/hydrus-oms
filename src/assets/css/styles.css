@@ -1,16 +1,15 @@
 /* declare a max-width variable for forms */
 :root {
-    --form-max-width: 600px;
+    --content-max-w: 652px;
+    --form-max-width: 420px;
     --color-success: #28a745;
 }
 
-.flash {
-    display: flex;
-    align-items: center;
+.page.container {
+    margin: 0 auto;
+    max-width: var(--content-max-w);
 }
-.flash.message {
-    margin: 0 0.5em;
-}
+
 .icon.success {
     color: var(--color-success);
 }
