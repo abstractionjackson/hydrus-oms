@@ -14,3 +14,10 @@
 		<SignUp />
 	</section>
 </main>
+
+<style>
+	section {
+		max-width: 360px;
+		margin: 0 auto;
+	}
+</style>
