@@ -37,7 +37,7 @@
 		width: fit-content;
 		margin: auto;
 	}
-	form {
+	section {
 		margin: auto;
 		max-width: var(--form-max-width);
 	}
