@@ -1,5 +1,4 @@
 // src/routes/+layout.ts
-import { invalidate } from '$app/navigation';
 import { dev } from '$app/environment';
 import {
 	PUBLIC_SUPABASE_ANON_KEY,

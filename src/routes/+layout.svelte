@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '@picocss/pico';
-	import "$lib/assets/css/styles.css";
+	import '$assets/css/styles.css';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
