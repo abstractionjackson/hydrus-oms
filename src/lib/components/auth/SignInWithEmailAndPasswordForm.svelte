@@ -39,8 +39,8 @@
 <style>
 	.container {
 		max-width: var(--form-max-width);
+		padding: 0;
 		margin: 2rem auto;
-		/* light gray border and shadow */
 		border: 1px solid #ccc;
 		border-radius: 10px;
 		box-shadow: 5px 5px 10px 0 #ccc;
@@ -48,7 +48,7 @@
 	header,
 	footer {
 		padding: 1rem;
-		background-color: #f4f4f4;
+		background-color: var(--color-neutral-light);
 	}
 	.content {
 		padding: 1rem;

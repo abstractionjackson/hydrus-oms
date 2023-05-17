@@ -6,7 +6,11 @@
 </script>
 
 <main>
-	<section class="page container">
-		<SignInWithEmailAndPasswordForm signUpPath="/signup" />
-	</section>
+	<SignInWithEmailAndPasswordForm signUpPath="/signup" />
 </main>
+
+<style>
+	main {
+		padding: 0 1rem;
+	}
+</style>

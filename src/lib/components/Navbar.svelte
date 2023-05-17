@@ -53,7 +53,7 @@
 
 <style>
 	nav {
-		background-color: #fbfbfc;
+		background-color: var(--color-neutral-light);
 		box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
 		height: 4rem;
 		padding: 0rem 1rem;
