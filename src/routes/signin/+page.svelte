@@ -1,19 +1,10 @@
 <script>
-	import { SignInWithEmailAndPasswordForm } from '$lib/components';
-	import logo from '$assets/images/logo3.png';
+	import { NavBarTop, SignInWithEmailAndPasswordForm } from '$lib/components';
 </script>
 
 <main>
 	<header>
-		<nav>
-			<ul>
-				<li>
-					<a href="/">
-						<img src={logo} alt="logo" id="logo" />
-					</a>
-				</li>
-			</ul>
-		</nav>
+		<NavBarTop />
 	</header>
 	<section class="container">
 		<header>
@@ -45,16 +36,8 @@
 </main>
 
 <style>
-	header {
-		padding: 2rem;
-	}
-	nav {
-		display: flex;
-		justify-content: center;
-	}
-	img#logo {
-		width: 3rem;
-		margin: auto;
+	main > header {
+		padding: 2rem 0;
 	}
 	h2 {
 		text-align: center;

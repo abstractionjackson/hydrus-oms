@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SignUp, Toast } from '$lib/components';
+	import { NavBarTop, SignUp, Toast } from '$lib/components';
 	import type { ActionData } from './$types';
 	export let form: ActionData;
 
@@ -7,16 +7,28 @@
 </script>
 
 <main>
-	{#if form?.success}
-		<Toast type="success" {message} />
-	{/if}
-	<section>
+	<header>
+		<NavBarTop />
+		{#if form?.success}
+			<Toast type="success" {message} />
+		{/if}
+	</header>
+	<section class="container">
+		<header>
+			<h2>Sign up for Hydrus</h2>
+		</header>
 		<SignUp />
 	</section>
 </main>
 
 <style>
-	section {
-		padding: 0 1rem;
+	main > header {
+		padding: 2rem 0;
+	}
+	h2 {
+		text-align: center;
+	}
+	.container {
+		max-width: 368px;
 	}
 </style>
