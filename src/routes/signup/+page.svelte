@@ -9,9 +9,6 @@
 <main>
 	<header>
 		<NavBarTop />
-		{#if form?.success}
-			<Toast type="success" {message} />
-		{/if}
 	</header>
 	<section class="container">
 		<header>
@@ -19,6 +16,9 @@
 		</header>
 		<SignUp />
 	</section>
+	{#if form?.success}
+		<Toast type="success" {message} />
+	{/if}
 </main>
 
 <style>
