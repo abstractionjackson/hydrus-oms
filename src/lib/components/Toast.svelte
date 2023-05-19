@@ -4,7 +4,7 @@
 	export let message: string;
 </script>
 
-<div class="container">
+<div transition:fly class="container-fluid">
 	{#if type === 'success'}
 		<span class="icon success icon-sm">
 			<svg
@@ -23,10 +23,21 @@
 			</svg>
 		</span>
 	{/if}
-	<p out:fly={{ duration: 1500, y: -25 }} class={`toast ${type}`}>{message}</p>
+	<p class={`toast ${type}`}>{message}</p>
 </div>
 
 <style>
+	.container-fluid {
+		position: absolute;
+		display: flex;
+		align-items: center;
+		bottom: 0;
+		padding: 0 1rem;
+	}
+	p {
+		margin: 0;
+		margin-left: 1rem;
+	}
 	.toast {
 		padding: 1rem;
 		/* round bottom border-radius */
