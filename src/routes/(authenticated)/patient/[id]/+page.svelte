@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		Breadcrumb,
-		PatientDetailTable,
-		PatientReadingGraph,
-		PatientReadingTable
-	} from '$lib/components';
+	import { PatientDetailTable, PatientReadingGraph, PatientReadingTable } from '$lib/components';
 	import type { PageServerData } from './$types';
 	export let data: PageServerData;
 	const { patient } = data;
