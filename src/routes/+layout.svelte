@@ -3,7 +3,6 @@
 	import '$assets/css/styles.css';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import Navbar from '$lib/components/Navbar.svelte';
 
 	export let data;
 
@@ -21,6 +20,5 @@
 </script>
 
 <div>
-	<Navbar show={session ? true : false} />
 	<slot />
 </div>

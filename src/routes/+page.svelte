@@ -1,16 +1,7 @@
-<script lang="ts">
-	import { SignInWithEmailAndPasswordForm } from '$lib/components';
-	import type { ActionData } from './$types';
-
-	export let form: ActionData;
+<script>
+	import { Landing } from '$lib/components';
 </script>
 
 <main>
-	<SignInWithEmailAndPasswordForm signUpPath="/signup" />
+	<Landing />
 </main>
-
-<style>
-	main {
-		padding: 0 1rem;
-	}
-</style>
