@@ -1,6 +1,9 @@
 <script>
+	import { page } from '$app/stores';
 	import logo from '$assets/images/logo3.png';
 	import SignOutBtn from './auth/SignOutBtn.svelte';
+
+	const { session } = $page.data;
 </script>
 
 <nav>
@@ -13,27 +16,29 @@
 	</ul>
 	<ul />
 	<ul>
-		<li>
-			<details role="list" dir="rtl">
-				<summary role="listbox" id="icon-hamburger">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="w-6 h-6"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-					</svg>
-				</summary>
-				<ul role="listbox">
-					<li>
-						<SignOutBtn />
-					</li>
-				</ul>
-			</details>
-		</li>
+		{#if session}
+			<li>
+				<details role="list" dir="rtl">
+					<summary role="listbox" id="icon-hamburger">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+							class="w-6 h-6"
+						>
+							<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+						</svg>
+					</summary>
+					<ul role="listbox">
+						<li>
+							<SignOutBtn />
+						</li>
+					</ul>
+				</details>
+			</li>
+		{/if}
 	</ul>
 </nav>
 
