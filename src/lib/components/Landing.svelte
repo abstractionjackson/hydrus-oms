@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import logo from '$assets/images/logo3.png';
+	import logo from '$assets/images/logo4_no_bg.png';
 	export let brandtext = 'Hydrus';
 	export let tagline = 'Microstent surgery outcomes tracking for physicians';
 </script>
@@ -17,7 +17,6 @@
 <style>
 	.container {
 		text-align: center;
-		background-color: white;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
