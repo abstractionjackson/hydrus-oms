@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { NavBarTop, SignInWithEmailAndPasswordForm } from '$lib/components';
 </script>
 

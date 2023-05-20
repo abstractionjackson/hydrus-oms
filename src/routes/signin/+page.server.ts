@@ -1,3 +1,4 @@
+import { redirect } from '@sveltejs/kit';
 import type { Actions } from '../$types';
 
 export const actions = {
@@ -12,6 +13,6 @@ export const actions = {
 		if (error) {
 			throw error;
 		}
-		return { success: true };
+		throw redirect(303, '/');
 	}
 } satisfies Actions;

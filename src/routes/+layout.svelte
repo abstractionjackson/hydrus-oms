@@ -19,6 +19,4 @@
 	});
 </script>
 
-<div>
-	<slot />
-</div>
+<slot />
