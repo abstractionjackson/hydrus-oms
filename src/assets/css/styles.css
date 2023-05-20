@@ -62,13 +62,3 @@
     width: 2em;
     height: 2em;
 }
-
-/* Images */
-.brand-logo {
-  width: 4rem;
-  height: 4rem;
-  background-image: var(--brand-logo-url);
-  /* contain bg image */
-  background-repeat: no-repeat;
-  background-size: contain;
-}

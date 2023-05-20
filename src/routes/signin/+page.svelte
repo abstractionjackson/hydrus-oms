@@ -37,7 +37,8 @@
 
 <style>
 	main > header {
-		padding: 2rem 0;
+		padding: 1rem 0 2rem;
+		margin: 0 1rem;
 	}
 	h2 {
 		text-align: center;

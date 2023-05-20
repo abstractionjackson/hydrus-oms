@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import logo from '$assets/images/logo4_no_bg.png';
 	import SignOutBtn from './auth/SignOutBtn.svelte';
 
 	const { session } = $page.data;
@@ -9,7 +10,7 @@
 	<ul>
 		<li>
 			<a href="/">
-				<div class="brand-logo" />
+				<img id="logo" src={logo} alt="logo" />
 			</a>
 		</li>
 	</ul>
