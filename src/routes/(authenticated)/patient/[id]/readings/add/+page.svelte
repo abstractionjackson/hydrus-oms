@@ -9,9 +9,10 @@
 <main class="container-fluid">
 	<section>
 		<header>
-			<h2>IOP Reading for <i>{patient.name_last}, {patient.name_first}</i></h2>
+			<h2>IOP Reading for <i>{patient?.name_last}, {patient?.name_first}</i></h2>
 		</header>
 		<form action="?/create" method="post">
+			<input type="hidden" name="case_date" value={patient?.case_date} />
 			<label for="date">Date</label>
 			<input type="date" name="date" id="date" placeholder="Date" required />
 			<label for="iop">Interocular Pressure (mmHg)</label>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import PatientList from '$lib/components/patient/PatientList.svelte';
+	import { PatientGraph, PatientList } from '$lib/components';
 	import type { PageData } from '../patient/$types';
 
 	export let data: PageData;
@@ -21,6 +21,7 @@
 </script>
 
 <main class="container-fluid">
+	<PatientGraph {patients} />
 	<PatientList {patients} />
 	{#if redirectFrom === 'patient/add'}
 		<section>
