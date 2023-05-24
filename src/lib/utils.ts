@@ -54,3 +54,13 @@ export const getReadingAvgByInterval = (
 	// indices of the return array correspond to the indices of the INTERVALS array
 	return INTERVALS.map((interval: string) => readingsByInterval[interval]?.reduce(toAverage, 0));
 };
+
+export function handleArrayResult<T>(result: T | T[] | null): T[] {
+	if (Array.isArray(result)) {
+		return result;
+	}
+	if (result === null) {
+		return [];
+	}
+	return [result];
+}

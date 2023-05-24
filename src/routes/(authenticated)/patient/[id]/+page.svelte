@@ -1,8 +1,27 @@
 <script lang="ts">
 	import { PatientDetailTable, PatientReadingGraph, PatientReadingTable } from '$lib/components';
 	import type { PageServerData } from './$types';
+	import { page } from '$app/stores';
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import type { Toast } from '$lib/stores';
+
 	export let data: PageServerData;
-	const { patient } = data;
+
+	$: patient = data.patient;
+
+	const toast = getContext<Writable<Toast>>('toast');
+
+	if ($page.url.searchParams.has('redirectFrom')) {
+		console.log('redirected from');
+		if ($page.url.searchParams.get('redirectFrom') === 'editReading') {
+			const recordDate = new Date($page.url.searchParams.get('date') ?? '');
+			toast.set({
+				hasMessage: true,
+				message: `Updated IOP Reading from ${recordDate.toDateString()}`
+			});
+		}
+	}
 </script>
 
 <main class="container-fluid">
@@ -28,11 +47,11 @@
 			</article>
 			<article>
 				<header>
-					<h3>Readings</h3>
+					<h3>Reading List</h3>
 				</header>
 				<PatientReadingTable {patient} />
 				<footer>
-					<a href="{patient.id}/readings/add" class="icon-md">
+					<a href="{patient.id}/reading/add" class="icon-md">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -74,15 +93,5 @@
 	h2,
 	h3 {
 		margin: auto;
-	}
-	table {
-		margin: auto;
-		width: fit-content;
-	}
-	table#demo tr td:first-child {
-		font-weight: 700;
-	}
-	table#reading th {
-		font-weight: 700;
 	}
 </style>

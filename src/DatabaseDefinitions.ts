@@ -59,7 +59,7 @@ export interface Database {
       }
       patient: {
         Row: {
-          case_date: string | null
+          case_date: string
           created_at: string | null
           dob: string | null
           id: number
@@ -71,7 +71,7 @@ export interface Database {
           user: string | null
         }
         Insert: {
-          case_date?: string | null
+          case_date: string
           created_at?: string | null
           dob?: string | null
           id?: number
@@ -83,7 +83,7 @@ export interface Database {
           user?: string | null
         }
         Update: {
-          case_date?: string | null
+          case_date?: string
           created_at?: string | null
           dob?: string | null
           id?: number

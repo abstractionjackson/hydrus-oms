@@ -1,22 +1,31 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { PatientGraph, PatientList } from '$lib/components';
+	import type { Reading } from '$lib/types';
+	import { handleArrayResult } from '$lib/utils';
 	import type { PageData } from '../patient/$types';
 
 	export let data: PageData;
 
-	const { patients } = data;
+	const patients = data.patients.map((patient) => {
+		let reading = handleArrayResult<Reading>(patient.reading);
+		return {
+			...patient,
+			reading
+		};
+	});
 
 	const { url } = $page;
 
+	// Redirects from patient/add contain patient data
 	let redirectFrom = url.searchParams.get('redirectFrom');
 	let patient_id: string;
 	let patient_name_last: string;
 	let patient_name_first: string;
 	if (redirectFrom === 'patient/add') {
-		patient_id = url.searchParams.get('id');
-		patient_name_last = url.searchParams.get('name_last');
-		patient_name_first = url.searchParams.get('name_first');
+		patient_id = url.searchParams.get('id') as string;
+		patient_name_last = url.searchParams.get('name_last') as string;
+		patient_name_first = url.searchParams.get('name_first') as string;
 	}
 </script>
 
