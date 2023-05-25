@@ -1,6 +1,6 @@
 <!-- takes a list of patient readings, and graphs average iop by interval -->
 <script lang="ts">
-	import type { Patient, Reading } from '$lib/types';
+	import type { Medication, Patient, Reading } from '$lib/types';
 	import { Bar } from 'svelte-chartjs';
 	import {
 		Chart as ChartJS,
@@ -11,13 +11,14 @@
 		CategoryScale,
 		LinearScale
 	} from 'chart.js';
-	import { getReadingAvgByInterval } from '$lib/utils';
+	import { getMedicationAvgByInterval, getReadingAvgByInterval } from '$lib/utils';
 	import { INTERVALS } from '$lib/constants';
 
 	ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 	interface Patients extends Patient {
 		reading: Reading[];
+		medication: Medication[];
 	}
 	export let patients: Patients[];
 
@@ -31,6 +32,13 @@
 				data: getReadingAvgByInterval(patients),
 				backgroundColor: 'rgba(255, 127, 80, 0.5)',
 				borderColor: 'rgba(255, 127, 80, 1)',
+				borderWidth: 1
+			},
+			{
+				label: 'Medication',
+				data: getMedicationAvgByInterval(patients),
+				backgroundColor: 'rgba(128, 128, 128, 0.5)',
+				borderColor: 'rgba(128, 128, 128, 1)',
 				borderWidth: 1
 			}
 		]

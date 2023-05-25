@@ -1,5 +1,5 @@
 import { INTERVALS } from './constants';
-import type { Patient, Reading } from './types';
+import type { Medication, Patient, Reading } from './types';
 
 const toAverage = (acc: number, curr: number, _: any, arr: number[]): number =>
 	acc + curr / arr.length;
@@ -54,7 +54,36 @@ export const getReadingAvgByInterval = (
 	// indices of the return array correspond to the indices of the INTERVALS array
 	return INTERVALS.map((interval: string) => readingsByInterval[interval]?.reduce(toAverage, 0));
 };
-
+export const getMedicationAvgByInterval = (
+	patients: Array<Patient & { medication: { amount: number; date: string }[] }>
+): number[] => {
+	const medicationsByInterval = patients.reduce(
+		(
+			acc: {
+				[key: string]: { amount: number; date: string }[];
+			},
+			patient: Patient & { medication: { amount: number; date: string }[] }
+		) => {
+			const { case_date } = patient;
+			const medications = patient.medication;
+			medications.forEach((medication) => {
+				const interval = intervalFromDates(new Date(case_date || ''), new Date(medication.date));
+				if (acc[interval]) {
+					acc[interval].push(medication);
+				} else {
+					acc[interval] = [medication];
+				}
+			});
+			return acc;
+		},
+		{}
+	);
+	// indices of the return array correspond to the indices of the INTERVALS array
+	return INTERVALS.map((interval: string) => {
+		const amounts = medicationsByInterval[interval]?.map((medication) => medication.amount);
+		return amounts?.reduce(toAverage, 0);
+	});
+};
 export function handleArrayResult<T>(result: T | T[] | null): T[] {
 	if (Array.isArray(result)) {
 		return result;
