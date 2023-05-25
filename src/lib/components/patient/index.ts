@@ -4,3 +4,4 @@ export { default as PatientReadingTable } from './PatientReadingTable.svelte';
 export { default as PatientList } from './PatientList.svelte';
 export { default as PatientAddForm } from './PatientAddForm.svelte';
 export { default as PatientGraph } from './PatientGraph.svelte';
+export { default as AddPatientBtn } from './AddPatientBtn.svelte';
