@@ -6,7 +6,6 @@
 	const { reading } = data;
 
 	let date: string = new Date(reading?.date as string).toISOString().split('T')[0];
-	console.log(date);
 	let iop: number = reading?.iop as number;
 </script>
 

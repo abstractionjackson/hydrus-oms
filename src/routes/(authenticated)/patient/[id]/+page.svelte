@@ -10,33 +10,61 @@
 
 	$: patient = data.patient;
 
+	const redirectFrom = $page.url.searchParams.get('redirectFrom');
+
 	const toast = getContext<Writable<Toast>>('toast');
 
-	if ($page.url.searchParams.has('redirectFrom')) {
-		console.log('redirected from');
-		if ($page.url.searchParams.get('redirectFrom') === 'editReading') {
-			const recordDate = new Date($page.url.searchParams.get('date') ?? '');
-			toast.set({
-				hasMessage: true,
-				message: `Updated IOP Reading from ${recordDate.toDateString()}`
-			});
-		}
+	if (redirectFrom === 'editReading') {
+		const recordDate = new Date($page.url.searchParams.get('date') ?? '');
+		toast.set({
+			hasMessage: true,
+			message: `Updated IOP Reading from ${recordDate.toDateString()}`
+		});
 	}
+
+	let showConfirmDelete = false;
+
+	const toggleShowConfirmDelete = () => {
+		showConfirmDelete = !showConfirmDelete;
+	};
 </script>
 
 <main class="container-fluid">
-	<header>
+	<header id="patient-detail">
 		<!-- the patient's name -->
+		<div />
 		<h2><span>{patient?.name_last}, </span><span>{patient?.name_first}</span></h2>
+		<details role="list" id="patient-settings">
+			<summary class="icon">
+				<!-- three vertical dots icon -->
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+					/>
+				</svg>
+			</summary>
+			<ul>
+				<li>
+					<button on:click={toggleShowConfirmDelete}>Delete</button>
+				</li>
+			</ul>
+		</details>
 	</header>
 	{#if patient}
 		<section class="container-fluid">
-			<article class="container-fluid">
-				<header>
-					<h3>IOP and Meds</h3>
-				</header>
-				<PatientReadingGraph {patient} />
-			</article>
+			<header>
+				<h3>IOP and Meds</h3>
+			</header>
+			<PatientReadingGraph {patient} />
 		</section>
 		<section class="grid">
 			<article>
@@ -79,11 +107,31 @@
 			</article>
 		</section>
 	{/if}
+	<dialog open={showConfirmDelete}>
+		<article>
+			<header>
+				<h2>Confirm Delete</h2>
+			</header>
+			<p>Are you sure you want to delete this patient?</p>
+			<form action="?/deletePatient" method="post">
+				<input type="hidden" name="name_last" value={patient?.name_last} />
+				<input type="hidden" name="name_first" value={patient?.name_first} />
+				<button type="submit">Delete</button>
+			</form>
+			<footer>
+				<button on:click={toggleShowConfirmDelete}>Cancel</button>
+			</footer>
+		</article>
+	</dialog>
 </main>
 
 <style>
 	main {
 		padding: 1rem;
+	}
+	header#patient-detail {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
 	}
 	header {
 		display: flex;
@@ -93,5 +141,20 @@
 	h2,
 	h3 {
 		margin: auto;
+	}
+	#patient-settings > .icon {
+		margin: 0;
+		padding: 0;
+		width: fit-content;
+		height: fit-content;
+		display: flex;
+		border: none;
+		margin-left: auto;
+	}
+	#patient-settings > .icon > svg {
+		width: 2rem;
+	}
+	#patient-settings > .icon::after {
+		display: none;
 	}
 </style>

@@ -35,7 +35,7 @@
 	<thead>
 		<tr>
 			<td>
-				<form action="?/delete" method="post" use:enhance={handleDelete}>
+				<form action="?/deleteReading" method="post" use:enhance={handleDelete}>
 					<button type="submit" class="secondary"> Delete </button>
 				</form>
 			</td>
