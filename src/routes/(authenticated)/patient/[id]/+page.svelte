@@ -5,6 +5,7 @@
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import type { Toast } from '$lib/stores';
+	import { goto } from '$app/navigation';
 
 	export let data: PageServerData;
 
@@ -27,14 +28,19 @@
 	const toggleShowConfirmDelete = () => {
 		showConfirmDelete = !showConfirmDelete;
 	};
+
+	const handleAddIOP = () => goto(`/patient/${patient?.id}/reading/add`);
+
+	const handleAddMed = () => goto(`/patient/${patient?.id}/medication/add`);
 </script>
 
 <main class="container-fluid">
 	<header id="patient-detail">
-		<!-- the patient's name -->
 		<div />
-		<h2><span>{patient?.name_last}, </span><span>{patient?.name_first}</span></h2>
-		<details role="list" id="patient-settings">
+		<h2 id="patient-detail-heading">
+			<span>{patient?.name_last}, </span><span>{patient?.name_first}</span>
+		</h2>
+		<details role="list" id="patient-detail-menu">
 			<summary class="icon">
 				<!-- three vertical dots icon -->
 				<svg
@@ -58,6 +64,10 @@
 				</li>
 			</ul>
 		</details>
+		<div id="patient-detail-btn-group">
+			<button id="patient-add-iop" on:click={handleAddIOP}>Add IOP</button>
+			<button id="patient-add-med" on:click={handleAddMed}>Add Medication</button>
+		</div>
 	</header>
 	{#if patient}
 		<section class="container-fluid">
@@ -129,9 +139,51 @@
 	main {
 		padding: 1rem;
 	}
-	header#patient-detail {
+	#patient-detail {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr auto 1fr;
+		grid-template-rows: 1fr 1fr;
+	}
+	#patient-detail-heading {
+		grid-column: 2;
+		grid-row: 1;
+		height: 100%;
+		width: 100%;
+		text-align: center;
+	}
+	#patient-detail-btn-group {
+		display: flex;
+		justify-content: space-around;
+		grid-column-start: 1;
+		grid-column-end: 4;
+		margin: auto;
+		width: 100%;
+	}
+	#patient-detail-btn-group > button {
+		width: fit-content;
+	}
+	#patient-detail-menu {
+		grid-column: 3;
+		grid-row: 1;
+		margin-bottom: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+	#patient-detail-menu > .icon {
+		margin: 0;
+		padding: 0;
+		width: fit-content;
+		height: fit-content;
+		display: flex;
+		border: none;
+		margin-left: auto;
+	}
+	#patient-detail-menu > .icon > svg {
+		width: 2rem;
+	}
+	#patient-detail-menu > .icon::after {
+		display: none;
 	}
 	header {
 		display: flex;
@@ -141,20 +193,5 @@
 	h2,
 	h3 {
 		margin: auto;
-	}
-	#patient-settings > .icon {
-		margin: 0;
-		padding: 0;
-		width: fit-content;
-		height: fit-content;
-		display: flex;
-		border: none;
-		margin-left: auto;
-	}
-	#patient-settings > .icon > svg {
-		width: 2rem;
-	}
-	#patient-settings > .icon::after {
-		display: none;
 	}
 </style>
