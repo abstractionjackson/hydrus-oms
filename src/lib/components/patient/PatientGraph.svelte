@@ -11,14 +11,13 @@
 		CategoryScale,
 		LinearScale
 	} from 'chart.js';
-	import { getMedicationAvgByInterval, getReadingAvgByInterval } from '$lib/utils';
+	import { getReadingAvgByInterval } from '$lib/utils';
 	import { INTERVALS } from '$lib/constants';
 
 	ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 	interface Patients extends Patient {
 		reading: Reading[];
-		medication: Medication[];
 	}
 	export let patients: Patients[];
 
@@ -29,14 +28,14 @@
 		datasets: [
 			{
 				label: 'IOP',
-				data: getReadingAvgByInterval(patients),
+				data: getReadingAvgByInterval(patients, 'iop'),
 				backgroundColor: 'rgba(255, 127, 80, 0.5)',
 				borderColor: 'rgba(255, 127, 80, 1)',
 				borderWidth: 1
 			},
 			{
 				label: 'Medication',
-				data: getMedicationAvgByInterval(patients),
+				data: getReadingAvgByInterval(patients, 'medication'),
 				backgroundColor: 'rgba(128, 128, 128, 0.5)',
 				borderColor: 'rgba(128, 128, 128, 1)',
 				borderWidth: 1

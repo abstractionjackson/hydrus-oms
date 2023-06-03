@@ -1,34 +1,37 @@
 <script lang="ts">
-	import { Line } from 'svelte-chartjs';
+	import { Bar } from 'svelte-chartjs';
 	import {
 		Chart as ChartJS,
 		Title,
 		Tooltip,
 		Legend,
-		LineElement,
-		LinearScale,
-		PointElement,
-		CategoryScale
+		BarElement,
+		CategoryScale,
+		LinearScale
 	} from 'chart.js';
+	import { getReadingAvgByInterval } from '$lib/utils';
+	import { INTERVALS } from '$lib/constants';
 	import type { Medication, Patient, Reading } from '$lib/types';
 
-	ChartJS.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale);
+	ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
 	export let patient: Patient & { reading: Reading[]; medication: Medication[] };
 
 	const data = {
-		labels: patient.reading.map(({ date }) => new Date(date).toLocaleDateString()),
+		labels: INTERVALS,
 		datasets: [
 			{
 				label: 'IOP',
-				data: patient.reading.map(({ iop }) => iop),
+				data: patient.reading.filter(({ date }) => date > patient.case_date).map(({ iop }) => iop),
 				// color coral
 				backgroundColor: 'rgba(255, 127, 80, 0.5)',
 				borderColor: 'rgba(255, 127, 80, 1)'
 			},
 			{
 				label: 'Meds',
-				data: patient.medication.map(({ amount }) => amount),
+				data: patient.reading
+					.filter(({ date }) => date > patient.case_date)
+					.map(({ medication }) => medication),
 				// color light blue
 				backgroundColor: 'rgba(173, 216, 230, 0.5)',
 				borderColor: 'rgba(173, 216, 230, 1)'
@@ -37,8 +40,6 @@
 	};
 </script>
 
-<!-- A Line Graph of the Patient Reading set
-iop by date -->
 <div>
-	<Line {data} />
+	<Bar {data} />
 </div>

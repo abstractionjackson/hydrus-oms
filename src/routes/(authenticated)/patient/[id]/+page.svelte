@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { PatientDetailTable, PatientReadingGraph, PatientReadingTable } from '$lib/components';
-	import type { PageServerData } from './$types';
+	import { PatientReadingGraph } from '$lib/components';
+	import type { PageData } from './$types';
 	import { page } from '$app/stores';
 	import { getContext } from 'svelte';
 	import type { Writable } from 'svelte/store';
 	import type { Toast } from '$lib/stores';
 	import { goto } from '$app/navigation';
+	import { getPreOpReading } from '$lib/utils';
 
-	export let data: PageServerData;
+	export let data: PageData;
 
 	$: patient = data.patient;
 
@@ -29,94 +30,61 @@
 		showConfirmDelete = !showConfirmDelete;
 	};
 
-	const handleAddIOP = () => goto(`/patient/${patient?.id}/reading/add`);
-
-	const handleAddMed = () => goto(`/patient/${patient?.id}/medication/add`);
+	const handleAddReading = () => goto(`/patient/${patient?.id}/reading/add`);
 </script>
 
-<main class="container-fluid">
-	<header id="patient-detail">
-		<div />
-		<h2 id="patient-detail-heading">
-			<span>{patient?.name_last}, </span><span>{patient?.name_first}</span>
-		</h2>
-		<details role="list" id="patient-detail-menu">
-			<summary class="icon">
-				<!-- three vertical dots icon -->
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="w-6 h-6"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
-					/>
-				</svg>
-			</summary>
-			<ul>
-				<li>
-					<button on:click={toggleShowConfirmDelete}>Delete</button>
-				</li>
-			</ul>
-		</details>
-		<div id="patient-detail-btn-group">
-			<button id="patient-add-iop" on:click={handleAddIOP}>Add IOP</button>
-			<button id="patient-add-med" on:click={handleAddMed}>Add Medication</button>
+<main class="container-fluid grid">
+	<section>
+		<header>
+			<h3 class="label">Patient</h3>
+			<h4 id="detail-heading-name">
+				<span>{patient?.name_last}, </span><span>{patient?.name_first}</span>
+			</h4>
+		</header>
+		<table>
+			<tbody>
+				<tr>
+					<td> Case Date </td>
+					<td>
+						{patient?.case_date}
+					</td>
+				</tr>
+				<tr>
+					<td> Pre-Op IOP </td>
+					<td>
+						{getPreOpReading(patient, 'iop')}
+					</td>
+				</tr>
+				<tr>
+					<td> Pre-Op Meds </td>
+					<td>
+						{getPreOpReading(patient, 'medication')}
+					</td>
+				</tr></tbody
+			>
+		</table>
+		<div class="container">
+			<button on:click={handleAddReading}> Add Reading </button>
 		</div>
-	</header>
-	{#if patient}
-		<section class="container-fluid">
-			<header>
-				<h3>IOP and Meds</h3>
-			</header>
-			<PatientReadingGraph {patient} />
-		</section>
-		<section class="grid">
-			<article>
+	</section>
+	<section>
+		{#if patient}
+			<section class="container-fluid">
 				<header>
-					<h3>Patient Detail</h3>
+					<h3>IOP and Meds</h3>
 				</header>
-				<PatientDetailTable {patient} />
-			</article>
-			<article>
-				<header>
-					<h3>Reading List</h3>
-				</header>
-				<PatientReadingTable {patient} />
-				<footer>
-					<a href="{patient.id}/reading/add" class="icon-md">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							class="w-6 h-6"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-							/>
-						</svg>
-					</a>
-				</footer>
-			</article>
-		</section>
-	{:else}
-		<section>
-			<article>
-				<header>
-					<h2>Patient Not Found</h2>
-				</header>
-			</article>
-		</section>
-	{/if}
+				<PatientReadingGraph {patient} />
+			</section>
+		{:else}
+			<section>
+				<article>
+					<header>
+						<h2>Patient Not Found</h2>
+					</header>
+				</article>
+			</section>
+		{/if}
+	</section>
 	<dialog open={showConfirmDelete}>
 		<article>
 			<header>
@@ -135,14 +103,41 @@
 	</dialog>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		padding: 1rem;
+		@media (min-width: 992px) {
+			grid-template-columns: 1fr 4fr;
+		}
+	}
+	.label {
+		font-size: 12px;
+		border: 1px solid black;
+		padding: 0 0.25rem;
+		border-radius: 1rem;
+		background-color: var(--secondary);
+		color: var(--secondary-inverse);
+		margin: 0 auto 0.25rem 0;
+	}
+	#detail-heading-name {
+		margin: 0;
+	}
+	table {
+		border: 1px solid #ccc;
+	}
+	tr {
+		border: none;
+		td:first-child {
+			font-weight: bold;
+		}
+	}
+	td {
+		border: none;
+		font-size: 12px;
 	}
 	#patient-detail {
 		display: grid;
 		grid-template-columns: 1fr auto 1fr;
-		grid-template-rows: 1fr 1fr;
 	}
 	#patient-detail-heading {
 		grid-column: 2;

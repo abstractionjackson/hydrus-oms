@@ -3,14 +3,11 @@
 	import { PatientGraph, PatientList, AddPatientBtn } from '$lib/components';
 	import type { Patient, Reading } from '$lib/types';
 	import { handleArrayResult } from '$lib/utils';
-	import { getContext } from 'svelte';
+	import { getContext, setContext } from 'svelte';
 	import type { PageData } from '../patient/$types';
 	import type { Writable } from 'svelte/store';
 	import type { Toast } from '$lib/stores';
-	import Typeahead from 'svelte-typeahead';
-	import { goto } from '$app/navigation';
-
-	const extract = (item: Patient) => item.name_last + ', ' + item.name_first;
+	import SearchPatients from '$lib/components/patient/SearchPatients.svelte';
 
 	const toast = getContext<Writable<Toast>>('toast');
 
@@ -23,6 +20,8 @@
 			reading
 		};
 	});
+
+	setContext('patients', patients);
 
 	const { url } = $page;
 
@@ -45,29 +44,15 @@
 			message: `Added patient ${nameLast}, ${nameFirst}`
 		});
 	}
-	// Search handler
-	const handlePatientSelect = (item: {
-		detail: {
-			original: Patient;
-		};
-	}) => {
-		goto(`/patient/${item.detail.original.id}`);
-	};
 </script>
 
 <main class="container-fluid">
 	<section>
 		<header>
 			<h3>Patient</h3>
+			<!-- <SearchPatients /> -->
 			<AddPatientBtn />
 		</header>
-		<Typeahead
-			label="Patient"
-			hideLabel
-			data={patients}
-			{extract}
-			on:select={handlePatientSelect}
-		/>
 	</section>
 	<section>
 		<h3>IOP and Medication Averages</h3>
@@ -88,6 +73,7 @@
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 2rem;
+		height: min-content;
 	}
 	header:first-of-type > h3 {
 		margin-bottom: 0;

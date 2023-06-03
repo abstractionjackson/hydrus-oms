@@ -5,7 +5,7 @@ export const load = (async ({ locals: { supabase }, params, depends }) => {
 	const { id } = params;
 	const { data, error } = await supabase
 		.from('patient')
-		.select('*, reading(id, date, iop), medication(id, date, amount)')
+		.select('*, reading(id, date, iop, medication)')
 		.eq('id', id)
 		.single();
 	if (error) {
@@ -14,7 +14,5 @@ export const load = (async ({ locals: { supabase }, params, depends }) => {
 	if (!data) {
 		return { patient: null };
 	}
-	return {
-		patient: data
-	};
+	return { patient: data };
 }) satisfies LayoutServerLoad;

@@ -6,8 +6,11 @@ export const actions = {
 		const formData = await request.formData();
 		const date = formData.get('date') as string;
 		const iop = Number(formData.get('iop') as string);
+		const medication = Number(formData.get('medication') as string);
 		const { id } = params;
-		const readingQuery = await supabase.from('reading').insert({ patient: Number(id), date, iop });
+		const readingQuery = await supabase
+			.from('reading')
+			.insert({ patient: Number(id), date, iop, medication });
 		if (readingQuery.error) {
 			console.error(readingQuery.error);
 		}

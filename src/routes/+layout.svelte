@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../app.scss';
 	import '@picocss/pico';
 	import '$assets/css/styles.css';
 	import { invalidate } from '$app/navigation';

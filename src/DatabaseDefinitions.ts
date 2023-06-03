@@ -34,64 +34,35 @@ export interface Database {
   }
   public: {
     Tables: {
-      medication: {
-        Row: {
-          amount: number
-          created_at: string | null
-          date: string
-          id: number
-          patient: number
-        }
-        Insert: {
-          amount: number
-          created_at?: string | null
-          date: string
-          id?: number
-          patient: number
-        }
-        Update: {
-          amount?: number
-          created_at?: string | null
-          date?: string
-          id?: number
-          patient?: number
-        }
-      }
       patient: {
         Row: {
-          case_date: string
+          case_date: string | null
           created_at: string | null
           dob: string | null
           id: number
           name_first: string | null
           name_last: string | null
           od_os: string[] | null
-          pre_op_iop: number | null
-          pre_op_meds_count: number | null
           user: string | null
         }
         Insert: {
-          case_date: string
+          case_date?: string | null
           created_at?: string | null
           dob?: string | null
           id?: number
           name_first?: string | null
           name_last?: string | null
           od_os?: string[] | null
-          pre_op_iop?: number | null
-          pre_op_meds_count?: number | null
           user?: string | null
         }
         Update: {
-          case_date?: string
+          case_date?: string | null
           created_at?: string | null
           dob?: string | null
           id?: number
           name_first?: string | null
           name_last?: string | null
           od_os?: string[] | null
-          pre_op_iop?: number | null
-          pre_op_meds_count?: number | null
           user?: string | null
         }
       }
@@ -101,6 +72,7 @@ export interface Database {
           date: string
           id: number
           iop: number
+          medication: number
           patient: number
         }
         Insert: {
@@ -108,6 +80,7 @@ export interface Database {
           date: string
           id?: number
           iop: number
+          medication: number
           patient: number
         }
         Update: {
@@ -115,6 +88,7 @@ export interface Database {
           date?: string
           id?: number
           iop?: number
+          medication?: number
           patient?: number
         }
       }
