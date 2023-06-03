@@ -8,6 +8,7 @@
 	import type { Writable } from 'svelte/store';
 	import type { Toast } from '$lib/stores';
 	import SearchPatients from '$lib/components/patient/SearchPatients.svelte';
+	import { goto } from '$app/navigation';
 
 	const toast = getContext<Writable<Toast>>('toast');
 
@@ -46,36 +47,28 @@
 	}
 </script>
 
-<main class="container-fluid">
+<main class="container-fluid grid">
 	<section>
 		<header>
-			<h3>Patient</h3>
-			<!-- <SearchPatients /> -->
-			<AddPatientBtn />
+			<h3>Patients</h3>
+			<SearchPatients />
 		</header>
+		<button on:click={() => goto('/patient/add')}>Add Patient</button>
+		<details>
+			<summary>Patient List</summary>
+			<PatientList {patients} />
+		</details>
 	</section>
 	<section>
 		<h3>IOP and Medication Averages</h3>
 		<PatientGraph {patients} />
 	</section>
-	<section>
-		<h3>All Patients</h3>
-		<PatientList {patients} />
-	</section>
 </main>
 
 <style>
 	main {
-		padding: 2rem 1rem;
-	}
-	header:first-of-type {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 2rem;
-		height: min-content;
-	}
-	header:first-of-type > h3 {
-		margin-bottom: 0;
+		@media (min-width: 992px) {
+			grid-template-columns: 1fr 4fr;
+		}
 	}
 </style>

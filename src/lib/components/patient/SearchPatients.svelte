@@ -18,9 +18,3 @@
 </script>
 
 <Typeahead label="Patient" hideLabel data={patients} {extract} on:select={handlePatientSelect} />
-
-<style>
-	form[data-svelte-search] {
-		height: min-content;
-	}
-</style>

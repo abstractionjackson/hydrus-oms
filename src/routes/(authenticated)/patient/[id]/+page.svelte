@@ -105,7 +105,6 @@
 
 <style lang="scss">
 	main {
-		padding: 1rem;
 		@media (min-width: 992px) {
 			grid-template-columns: 1fr 4fr;
 		}

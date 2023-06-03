@@ -37,7 +37,6 @@ export const actions = {
 		if (error) {
 			console.error(error);
 		}
-		console.log('added patient', data);
 		await supabase.from('reading').insert([
 			{
 				patient: data.id,

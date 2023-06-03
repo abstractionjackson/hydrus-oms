@@ -13,3 +13,9 @@
 		</li>
 	{/each}
 </ul>
+
+<style>
+	li {
+		list-style: none;
+	}
+</style>

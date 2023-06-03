@@ -13,6 +13,7 @@
 	} from 'chart.js';
 	import { getReadingAvgByInterval } from '$lib/utils';
 	import { INTERVALS } from '$lib/constants';
+	import { onMount } from 'svelte';
 
 	ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -20,6 +21,23 @@
 		reading: Reading[];
 	}
 	export let patients: Patients[];
+
+	function filterPostOpReadings(reading: Reading, case_date: string) {
+		return new Date(reading.date).getTime() > new Date(case_date).getTime();
+	}
+
+	onMount(() => {
+		//transform the patients array to include only post-op readings
+		patients = patients.map((patient) => {
+			let reading = patient.reading.filter((reading) =>
+				filterPostOpReadings(reading, patient.case_date ?? '')
+			);
+			return {
+				...patient,
+				reading
+			};
+		});
+	});
 
 	// chart
 	const labels = [...INTERVALS];
