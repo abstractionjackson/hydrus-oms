@@ -77,3 +77,13 @@ export function getPreOpReading(
 	});
 	return preOpReading ? preOpReading[key] : 0;
 }
+export function getPreviousDate(isoString: string) {
+	// Parse the ISO string into a Date object.
+	const date = new Date(isoString);
+
+	// Subtract one day from the Date object.
+	date.setDate(date.getDate() - 1);
+
+	// Return the previous date as an ISO string.
+	return date.toISOString();
+}
