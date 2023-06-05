@@ -11,6 +11,7 @@
 </script>
 
 <nav>
+	<ul></ul>
 	<ul>
 		<li>
 			<a href="/">
@@ -18,7 +19,6 @@
 			</a>
 		</li>
 	</ul>
-	<ul />
 	<ul>
 		{#if session}
 			<li>
@@ -39,7 +39,6 @@
 						<li>
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
 							<p
-								class="link"
 								on:click={() => {
 									showConfirmSignOut = true;
 									dropdown.open = false;
@@ -69,19 +68,17 @@
 
 <style lang="scss">
 	nav {
-		display: flex;
-		justify-content: flex-start;
-		padding: 0 1rem;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
 	}
-	ul:last-child {
-		margin-left: auto;
-	}
-	img#logo {
-		width: 4rem;
+	nav > ul {
 		margin: auto;
 	}
-	details {
-		margin-left: auto;
+	p { margin: 0;}
+	p:hover { cursor: pointer; }
+	img#logo {
+		width: 200px;
+		margin: auto;
 	}
 	#icon-hamburger > svg {
 		width: 2em;
