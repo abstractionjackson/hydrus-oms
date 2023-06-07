@@ -19,7 +19,7 @@
 			</a>
 		</li>
 	</ul>
-	<ul>
+	<ul id="menu">
 		{#if session}
 			<li>
 				<details role="list" dir="rtl" bind:this={dropdown}>
@@ -73,6 +73,9 @@
 	}
 	nav > ul {
 		margin: auto;
+	}
+	ul#menu {
+		margin-left: auto;
 	}
 	p { margin: 0;}
 	p:hover { cursor: pointer; }
