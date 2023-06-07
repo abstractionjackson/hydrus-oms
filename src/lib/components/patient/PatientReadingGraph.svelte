@@ -9,32 +9,30 @@
 		CategoryScale,
 		LinearScale
 	} from 'chart.js';
-	import { getReadingAvgByInterval } from '$lib/utils';
-	import { INTERVALS } from '$lib/constants';
-	import type { Medication, Patient, Reading } from '$lib/types';
+	import { HOMS_INTERVAL } from '$lib/constants';
+	import type { Reading } from '$types';
 
 	ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
-	export let patient: Patient & { reading: Reading[]; medication: Medication[] };
-
+	export let reading: Reading[]
 	const data = {
-		labels: INTERVALS,
+		labels: [...HOMS_INTERVAL].slice(1),
 		datasets: [
 			{
 				label: 'IOP',
-				data: patient.reading.filter(({ date }) => date > patient.case_date).map(({ iop }) => iop),
+				data: reading.map(({ iop }) => iop),
 				// color coral
 				backgroundColor: 'rgba(255, 127, 80, 0.5)',
-				borderColor: 'rgba(255, 127, 80, 1)'
+				borderColor: 'rgba(255, 127, 80, 1)',
+				borderWidth: 1,
 			},
 			{
 				label: 'Meds',
-				data: patient.reading
-					.filter(({ date }) => date > patient.case_date)
+				data: reading
 					.map(({ medication }) => medication),
-				// color light blue
-				backgroundColor: 'rgba(173, 216, 230, 0.5)',
-				borderColor: 'rgba(173, 216, 230, 1)'
+				backgroundColor: 'rgba(128, 128, 128, 0.5)',
+				borderColor: 'rgba(128, 128, 128, 1)',
+				borderWidth: 1,
 			}
 		]
 	};

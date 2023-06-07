@@ -113,7 +113,16 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_text_value: {
+        Args: {
+          text_column: string
+        }
+        Returns: string
+      }
+      my_func: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

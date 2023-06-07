@@ -3,7 +3,7 @@
 	import { goto, invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
 	import type { Patient, Reading } from '$lib/types';
-	import { intervalFromDates } from '$lib/utils';
+	import { formatInterval, getReadingInterval } from '$lib/utils/utils';
 
 	export let patient: Patient & { reading: Reading[] };
 
@@ -55,7 +55,7 @@
 					<input type="checkbox" on:change={handleChanged} />
 				</td>
 				<td>{new Date(reading.date).toLocaleDateString()}</td>
-				<td>{intervalFromDates(new Date(patient.case_date ?? ''), new Date(reading.date))}</td>
+				<td>{formatInterval(getReadingInterval(reading, patient.case_date))}</td>
 				<td>{reading.iop}</td>
 				<td>
 					<button

@@ -1,6 +1,7 @@
-import type { Interval } from './types';
+import type { HOMSInterval } from '$types';
 
-export const INTERVALS: Interval[] = [
+export const HOMS_INTERVAL: HOMSInterval[] = [
+	'Pre-Op',
 	'One Day',
 	'One Month',
 	'Three Months',

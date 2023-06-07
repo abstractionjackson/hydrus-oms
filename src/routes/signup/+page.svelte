@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { NavBarTop, SignUp, Toast } from '$lib/components';
 	import type { ActionData } from './$types';
-	export let form: ActionData;
+	// export let form: ActionData;
 
-	const message = 'Account created. Check your email to confirm, and sign in.';
+	// const message = 'Account created. Check your email to confirm, and sign in.';
 </script>
 
 <main>
@@ -16,9 +16,9 @@
 		</header>
 		<SignUp />
 	</section>
-	{#if form?.success}
+	<!-- {#if form?.success}
 		<Toast type="success" {message} />
-	{/if}
+	{/if} -->
 </main>
 
 <style>

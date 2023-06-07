@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { PatientGraph, PatientList, AddPatientBtn } from '$lib/components';
 	import type { Patient, Reading } from '$lib/types';
-	import { handleArrayResult } from '$lib/utils';
+	import { getReadingArray, isPostOp } from '$lib/utils/utils';
 	import { getContext, setContext } from 'svelte';
 	import type { PageData } from '../patient/$types';
 	import type { Writable } from 'svelte/store';
@@ -14,13 +14,12 @@
 
 	export let data: PageData;
 
-	const patients = data.patients.map((patient) => {
-		let reading = handleArrayResult<Reading>(patient.reading);
+	$: patients = data.patients.map(patient => {
 		return {
 			...patient,
-			reading
-		};
-	});
+			reading: getReadingArray(patient.reading)
+		};	
+	})
 
 	setContext('patients', patients);
 
@@ -61,7 +60,12 @@
 	</section>
 	<section>
 		<h3>IOP and Medication Averages</h3>
-		<PatientGraph {patients} />
+		<PatientGraph patients={patients.map(patient => {
+			return {
+				...patient,
+				reading: patient.reading.filter(reading => isPostOp(reading, patient.case_date))
+			}
+		})} />
 	</section>
 </main>
 

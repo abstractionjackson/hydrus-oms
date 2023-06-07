@@ -1,1 +1,1 @@
-supabase gen types typescript --local > src/DatabaseDefinitions.ts
+supabase gen types typescript --local > types/DatabaseDefinitions.ts

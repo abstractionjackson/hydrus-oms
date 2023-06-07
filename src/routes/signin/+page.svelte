@@ -8,7 +8,7 @@
 	</header>
 	<section class="container">
 		<header>
-			<h2>Sign in to Hydrus</h2>
+			<h2>Sign in to HOMS</h2>
 		</header>
 		<SignInWithEmailAndPasswordForm />
 	</section>

@@ -35,10 +35,6 @@
 				<label for="os">OS</label>
 			</div>
 		</div>
-		<label for="pre_op_iop">Pre-Op IOP </label>
-		<input type="number" name="pre_op_iop" id="pre_op_iop" placeholder="0" required />
-		<label for="pre_op_meds">Pre-Op Meds</label>
-		<input type="number" name="pre_op_meds_count" id="pre_op_meds_count" placeholder="0" required />
 		<input type="submit" value="Submit" />
 	</form>
 </section>

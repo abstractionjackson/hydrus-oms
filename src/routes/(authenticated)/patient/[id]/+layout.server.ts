@@ -1,3 +1,4 @@
+import { error as layoutError } from '@sveltejs/kit'
 import type { LayoutServerLoad } from './$types';
 
 export const load = (async ({ locals: { supabase }, params, depends }) => {
@@ -5,14 +6,18 @@ export const load = (async ({ locals: { supabase }, params, depends }) => {
 	const { id } = params;
 	const { data, error } = await supabase
 		.from('patient')
-		.select('*, reading(id, date, iop, medication)')
+		.select('*, reading(*)')
 		.eq('id', id)
 		.single();
 	if (error) {
 		console.error(error);
 	}
 	if (!data) {
-		return { patient: null };
+		throw layoutError(
+			404, {
+				message: 'Patient not found'
+			}
+		)
 	}
 	return { patient: data };
 }) satisfies LayoutServerLoad;

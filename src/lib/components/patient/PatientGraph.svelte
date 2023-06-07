@@ -1,6 +1,6 @@
 <!-- takes a list of patient readings, and graphs average iop by interval -->
 <script lang="ts">
-	import type { Medication, Patient, Reading } from '$lib/types';
+	import type { HOMSInterval, Patient, Reading } from '$types';
 	import { Bar } from 'svelte-chartjs';
 	import {
 		Chart as ChartJS,
@@ -11,9 +11,10 @@
 		CategoryScale,
 		LinearScale
 	} from 'chart.js';
-	import { getReadingAvgByInterval } from '$lib/utils';
-	import { INTERVALS } from '$lib/constants';
-	import { onMount } from 'svelte';
+	import { HOMS_INTERVAL } from '$lib/constants';
+	import { getPatientsIntervalMap } from '$lib/utils';
+	import type { IntervalMap } from '$lib/models';
+	import { get } from 'svelte/store';
 
 	ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -22,38 +23,38 @@
 	}
 	export let patients: Patients[];
 
-	function filterPostOpReadings(reading: Reading, case_date: string) {
-		return new Date(reading.date).getTime() > new Date(case_date).getTime();
-	}
+	function getAverages(intervalMap: IntervalMap, key: 'iop' | 'medication'): number[] {
+			const averages: number[] = [];
+			for (const [interval, value] of intervalMap.entries()) {
+				if (value.length === 0) continue;
+				const averageIop =
+					value.reduce((acc: number, reading: Reading) => acc + reading[key], 0) /
+					value.length;
+				averages.push(averageIop);
+			}
+			return averages;
+		};
 
-	onMount(() => {
-		//transform the patients array to include only post-op readings
-		patients = patients.map((patient) => {
-			let reading = patient.reading.filter((reading) =>
-				filterPostOpReadings(reading, patient.case_date ?? '')
-			);
-			return {
-				...patient,
-				reading
-			};
-		});
-	});
+	$: patientReadingAverages = getPatientsIntervalMap(patients)
+	$: {
+		patientReadingAverages.delete(HOMS_INTERVAL[0]); // delete pre-op
+	};
 
 	// chart
-	const labels = [...INTERVALS];
-	const data = {
+	const labels = [...HOMS_INTERVAL].slice(1);
+	$: data = {
 		labels,
 		datasets: [
 			{
 				label: 'IOP',
-				data: getReadingAvgByInterval(patients, 'iop'),
+				data: getAverages(patientReadingAverages, 'iop'),
 				backgroundColor: 'rgba(255, 127, 80, 0.5)',
 				borderColor: 'rgba(255, 127, 80, 1)',
 				borderWidth: 1
 			},
 			{
 				label: 'Medication',
-				data: getReadingAvgByInterval(patients, 'medication'),
+				data: getAverages(patientReadingAverages, 'medication'),
 				backgroundColor: 'rgba(128, 128, 128, 0.5)',
 				borderColor: 'rgba(128, 128, 128, 1)',
 				borderWidth: 1
