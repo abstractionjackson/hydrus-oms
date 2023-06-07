@@ -75,7 +75,9 @@
 		margin: auto;
 	}
 	ul#menu {
-		margin-left: auto;
+		width: 100%;
+		display:flex;
+		justify-content: flex-end;  
 	}
 	p { margin: 0;}
 	p:hover { cursor: pointer; }
