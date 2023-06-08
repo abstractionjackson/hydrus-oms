@@ -5,7 +5,6 @@
 	import { getContext } from 'svelte';
 
 	const patients = getContext<Patient[]>('patients');
-	console.log("patients context", patients)
 
 	const extract = (item: Patient) => item.name_last + ', ' + item.name_first;
 
