@@ -1,5 +1,9 @@
 <script lang="ts">
 	import { NavBarTop, SignInWithEmailAndPasswordForm } from '$lib/components';
+	import type { ActionData } from './$types';
+	
+	export let form: ActionData;
+	console.log(form)
 </script>
 
 <main>
@@ -12,6 +16,15 @@
 		</header>
 		<SignInWithEmailAndPasswordForm />
 		<footer>
+			{#if form?.incorrect}
+			<p>
+				<span class="icon" id="x">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					  </svg>					  
+				</span>
+				{form.message}</p>
+		{/if}
 			<p>
 				<a href="/forgot-password">Forgot Password</a>
 			</p>
@@ -51,6 +64,9 @@
 	}
 	.icon > svg {
 		width: 1.2em;
+	}
+	.icon#x > svg {
+		color: red;
 	}
 	.container {
 		max-width: 368px;
