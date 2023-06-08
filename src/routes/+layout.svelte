@@ -1,7 +1,6 @@
 <script lang="ts">
-	import '../app.scss';
 	import '@picocss/pico';
-	import '$assets/css/styles.css';
+	import '../app.scss';
 	import { invalidate } from '$app/navigation';
 	import { onMount, setContext } from 'svelte';
 	import { toast } from '$lib/stores';
