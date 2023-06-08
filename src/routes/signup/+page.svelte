@@ -12,7 +12,7 @@
 	</header>
 	<section class="container">
 		<header>
-			<h2>Sign up for Hydrus</h2>
+			<h2>Sign up for HOMS</h2>
 		</header>
 		<SignUp />
 	</section>
