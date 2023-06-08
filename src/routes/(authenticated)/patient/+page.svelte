@@ -1,16 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { PatientGraph, PatientList, AddPatientBtn } from '$lib/components';
-	import type { Patient, Reading } from '$lib/types';
-	import { getReadingArray, isPostOp } from '$lib/utils/utils';
-	import { getContext, setContext } from 'svelte';
+	import { PatientGraph, PatientList, SearchPatients } from '$lib/components';
+	import { getReadingArray } from '$lib/utils/utils';
+	import { setContext } from 'svelte';
 	import type { PageData } from '../patient/$types';
-	import type { Writable } from 'svelte/store';
-	import type { Toast } from '$lib/stores';
-	import SearchPatients from '$lib/components/patient/SearchPatients.svelte';
 	import { goto } from '$app/navigation';
-
-	const toast = getContext<Writable<Toast>>('toast');
 
 	export let data: PageData;
 
@@ -21,29 +15,8 @@
 		};	
 	})
 
-	setContext('patients', patients);
-
-	const { url } = $page;
-
-	// Redirects from patient/add contain patient data
-	const redirectFrom = url.searchParams.get('redirectFrom');
-	if (redirectFrom === 'deletePatient') {
-		const nameLast = $page.url.searchParams.get('name_last');
-		const nameFirst = $page.url.searchParams.get('name_first');
-		toast.set({
-			hasMessage: true,
-			message: `Deleted patient ${nameLast}, ${nameFirst}`
-		});
-	}
-
-	if (redirectFrom === 'patient/add') {
-		const nameLast = $page.url.searchParams.get('name_last');
-		const nameFirst = $page.url.searchParams.get('name_first');
-		toast.set({
-			hasMessage: true,
-			message: `Added patient ${nameLast}, ${nameFirst}`
-		});
-	}
+	$: setContext('patients', patients);
+	
 </script>
 
 <main class="container-fluid grid">
