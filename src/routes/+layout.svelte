@@ -5,6 +5,7 @@
 	import { invalidate } from '$app/navigation';
 	import { onMount, setContext } from 'svelte';
 	import { toast } from '$lib/stores';
+	import { page } from '$app/stores';
 
 	export let data;
 
@@ -22,6 +23,18 @@
 		const { data } = supabase.auth.onAuthStateChange((event, _session) => {
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
+			}
+			const { hash } = $page.url;
+			const hashParams = new URLSearchParams(hash.slice(1));
+			if(event === "SIGNED_IN" && hashParams.get("type") === "recovery") {
+				// place the access token in the header
+				supabase.auth.setSession({
+					..._session,
+					access_token: hashParams.get("access_token") as string,
+					refresh_token: hashParams.get("refresh_token") as string,
+				});
+				// redirect to the recovery page
+				window.location.href = "/recovery"
 			}
 		});
 
