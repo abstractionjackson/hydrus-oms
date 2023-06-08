@@ -63,7 +63,7 @@
 		<PatientGraph patients={patients.map(patient => {
 			return {
 				...patient,
-				reading: patient.reading.filter(reading => isPostOp(reading, patient.case_date))
+				reading: patient.reading
 			}
 		})} />
 	</section>

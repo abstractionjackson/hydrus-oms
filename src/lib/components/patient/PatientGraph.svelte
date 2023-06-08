@@ -14,7 +14,6 @@
 	import { HOMS_INTERVAL } from '$lib/constants';
 	import { getPatientsIntervalMap } from '$lib/utils';
 	import type { IntervalMap } from '$lib/models';
-	import { get } from 'svelte/store';
 
 	ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -35,9 +34,9 @@
 			return averages;
 		};
 
-	$: patientReadingAverages = getPatientsIntervalMap(patients)
+	$: patientIntervalMap = getPatientsIntervalMap(patients)
 	$: {
-		patientReadingAverages.delete(HOMS_INTERVAL[0]); // delete pre-op
+		patientIntervalMap.delete(HOMS_INTERVAL[0]); // delete pre-op
 	};
 
 	// chart
@@ -47,14 +46,14 @@
 		datasets: [
 			{
 				label: 'IOP',
-				data: getAverages(patientReadingAverages, 'iop'),
+				data: getAverages(patientIntervalMap, 'iop'),
 				backgroundColor: 'rgba(255, 127, 80, 0.5)',
 				borderColor: 'rgba(255, 127, 80, 1)',
 				borderWidth: 1
 			},
 			{
 				label: 'Medication',
-				data: getAverages(patientReadingAverages, 'medication'),
+				data: getAverages(patientIntervalMap, 'medication'),
 				backgroundColor: 'rgba(128, 128, 128, 0.5)',
 				borderColor: 'rgba(128, 128, 128, 1)',
 				borderWidth: 1

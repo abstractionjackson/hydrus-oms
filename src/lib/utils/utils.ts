@@ -21,16 +21,16 @@ export function formatInterval(interval: Interval): HOMSInterval {
 	if(Math.round(interval.length('days')) === 1) {
 		return HOMS_INTERVAL[1];
 	}
-	if(Math.floor(interval.length('months')) === 1) {
+	if(Math.round(interval.length('months')) === 1) {
 		return HOMS_INTERVAL[2];
 	}
-	if(Math.floor(interval.length('months')) === 3) {
+	if(Math.round(interval.length('months')) === 3) {
 		return HOMS_INTERVAL[3];
 	}
-	if(Math.floor(interval.length('months')) === 6) {
+	if(Math.round(interval.length('months')) === 6) {
 		return HOMS_INTERVAL[4];
 	}
-	if(Math.floor(interval.length('months')) === 12) {
+	if(Math.round(interval.length('months')) === 12) {
 		return HOMS_INTERVAL[5];
 	}
 	console.error(
