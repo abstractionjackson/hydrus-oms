@@ -1,4 +1,5 @@
 // import type { Database } from '$types/DatabaseDefinitions';
+import type { Interval } from 'luxon';
 import type { Database } from './DatabaseDefinitions';
 
 export type Patient = Omit<Database['public']['Tables']['patient']['Row'], 'created_at'>;
@@ -10,3 +11,8 @@ export type HOMSInterval =
 	| 'Three Months'
 	| 'Six Months'
 	| 'Twelve Months';
+export type ReadingDiff = {
+	interval: Interval;
+	iopDelta: number;
+	medicationDelta: number;
+}

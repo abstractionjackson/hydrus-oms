@@ -2,6 +2,7 @@ import type { HOMSInterval, Reading } from '$types';
 import { HOMS_INTERVAL } from '$lib/constants';
 import { patients } from './patient';
 import { DateTime } from 'luxon';
+
 const patient = patients[0];
 const DEFAULT_ID = 1;
 const DEFAULT_DATE = patient.case_date;
