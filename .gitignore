@@ -11,3 +11,9 @@ vite.config.ts.timestamp-*
 
 # Local Netlify folder
 .netlify
+
+# Python
+*.pyc
+
+# Mock Data Generation Module
+*mock*.csv

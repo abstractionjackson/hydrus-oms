@@ -2,7 +2,8 @@
 import datetime
 import unittest
 
-from .patient import fake_dob, fake_operation_date, Patient
+
+from dev.mock_data_gen.patient import fake_dob, fake_operation_date, Patient
 
 class TestFakeDob(unittest.TestCase):
     def test_fake_dob(self):

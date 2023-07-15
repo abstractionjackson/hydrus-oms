@@ -1,8 +1,8 @@
 import datetime
 import unittest
 
-from .iop_reading import IopReading, get_random_mmHG, MAX_MMHG, MIN_MMHG
-from .interval import interval_list, get_reading_date
+from dev.mock_data_gen.iop_reading import get_random_mmHG, IopReading, MAX_MMHG, MIN_MMHG
+from dev.mock_data_gen.interval import interval_list, get_reading_date
 
 class TestIOPReading(unittest.TestCase):
     def test_get_random_mmHG(self):

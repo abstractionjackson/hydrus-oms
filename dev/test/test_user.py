@@ -1,6 +1,6 @@
 import unittest
 
-from .user import User
+from dev.mock_data_gen.user import User
 
 class TestUser(unittest.TestCase):
     def test_user(self):

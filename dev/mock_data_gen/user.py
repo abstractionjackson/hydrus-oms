@@ -1,6 +1,8 @@
 import datetime
 from faker import Faker
 
+faker = Faker()
+
 # write a function that return a random date
 # in the range of 18 to 70 years prior to today's date
 def fake_dob(faker=Faker()):
@@ -12,6 +14,5 @@ def fake_dob(faker=Faker()):
 
 class User:
     def __init__(self):
-        faker = Faker()
         self.email = faker.email()
         self.password = faker.password()

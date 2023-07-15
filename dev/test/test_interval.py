@@ -1,7 +1,7 @@
 import datetime
 import unittest
 
-from .interval import get_interval, get_reading_date, interval_list
+from dev.mock_data_gen.interval import get_interval, interval_list, get_reading_date
 
 class TestInterval(unittest.TestCase):
     def test_interval_list(self):

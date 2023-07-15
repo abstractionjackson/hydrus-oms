@@ -1,8 +1,8 @@
 import datetime
 import unittest
 
-from .medication_reading import get_random_quantity, MedicationReading
-from .interval import interval_list, get_reading_date
+from dev.mock_data_gen.medication_reading import get_random_quantity, MedicationReading
+from dev.mock_data_gen.interval import interval_list, get_reading_date
 
 class TestMedicationReading(unittest.TestCase):
     def test_get_random_quantity(self):
