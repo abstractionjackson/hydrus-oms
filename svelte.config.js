@@ -23,7 +23,7 @@ const config = {
 		alias: {
 			$assets: './src/assets',
 			$test: './test',
-			$types: './types'
+			$types: './types',
 		}
 	}
 };

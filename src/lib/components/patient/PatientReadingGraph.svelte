@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { HOMS_INTERVAL } from "$lib/constants";
+	import { HOMS_INTERVAL, CHART_COLORS } from "$lib/constants";
 	import type { Patient } from "$types";
 	import { Chart, type ChartItem, BarController, BarElement, CategoryScale, LinearScale, type ChartConfiguration, Legend } from "chart.js";
 	import { onMount } from "svelte";
@@ -9,13 +9,6 @@
   let canvas: HTMLCanvasElement;
 
   export let patient: Patient;
-
-  const CHART_COLORS = {
-    red: "rgb(255, 99, 132)",
-    redBorder: "rgb(255, 99, 132)",
-    blue: "rgb(54, 162, 235)",
-    blueBorder: "rgb(54, 162, 235)",
-  }
 
   const config: ChartConfiguration = {
     type: 'bar',
