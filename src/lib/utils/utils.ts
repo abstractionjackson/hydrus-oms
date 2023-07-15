@@ -1,4 +1,4 @@
-import type { HOMSInterval, Patient, Reading, ReadingDiff } from '$types';
+import type { HOMSInterval, IopReading, MedicationReading, Patient, Reading, ReadingDiff } from '$types';
 import { HOMS_INTERVAL } from '$lib/constants';
 import { DateTime, Interval } from 'luxon';
 import { IntervalMap } from '$lib/models';
@@ -6,10 +6,26 @@ import { IntervalMap } from '$lib/models';
 export function getReadingInterval({
 	reading,
 	caseDate,
-}: { reading: Reading, caseDate: Patient['case_date']}): Interval {
+}: { reading: Reading, caseDate: Patient['operation_date']}): Interval {
 	return Interval.fromDateTimes(
 		DateTime.fromISO(caseDate),
 		DateTime.fromISO(reading.date),
+	);
+};
+
+interface GetIntervalParams {
+	reading: IopReading | MedicationReading;
+	patient: Patient;
+}
+export function getInterval({
+	reading,
+	patient
+}: GetIntervalParams) {
+	const { operation_date } = patient;
+	const { date } = reading;
+	return Interval.fromDateTimes(
+		DateTime.fromISO(operation_date),
+		DateTime.fromISO(date),
 	);
 };
 
@@ -43,8 +59,8 @@ export function formatInterval(interval: Interval): HOMSInterval {
 export function getPatientsIntervalMap(patients: Array<Patient & { reading: Reading[] }>) {
 	const intervalMap = new IntervalMap({ readings: [], caseDate: "" });
 	for(const patient of patients) {
-		const { case_date, reading } = patient;
-		const patientIntervalMap = new IntervalMap({ readings: reading, caseDate: case_date});
+		const { operation_date, reading } = patient;
+		const patientIntervalMap = new IntervalMap({ readings: reading, caseDate: operation_date});
 		for(const [interval, readings] of patientIntervalMap.entries()) {
 			// interval is a HOMSInterval, readings is an array of Reading
 			readings.forEach((reading: Reading) => intervalMap.add(interval, reading));
@@ -63,14 +79,14 @@ export function getPreviousDate(isoString: string) {
 	// Return the previous date as an ISO string.
 	return date.toISOString();
 }
-export function isPostOp(reading: Pick<Reading, "date">, case_date: string) {
-	return new Date(reading.date).getTime() > new Date(case_date).getTime();
+export function isPostOp(reading: Pick<Reading, "date">, operation_date: string) {
+	return new Date(reading.date).getTime() > new Date(operation_date).getTime();
 };
 export function getPreOpReading(
 	reading: Reading[],
-	case_date: string
+	operation_date: string
 ): Reading {
-	const preOpReading = reading.find((reading) => !isPostOp(reading, case_date));
+	const preOpReading = reading.find((reading) => !isPostOp(reading, operation_date));
 	if (!preOpReading) {
 		throw new Error('No pre-op reading found');
 	}
