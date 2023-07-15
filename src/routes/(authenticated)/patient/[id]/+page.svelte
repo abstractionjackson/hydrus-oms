@@ -1,40 +1,24 @@
 <script lang="ts">
 	import { PatientReadingGraph } from '$lib/components';
 	import type { PageData } from './$types';
-	import { page } from '$app/stores';
-	import { getContext } from 'svelte';
-	import type { Writable } from 'svelte/store';
-	import type { Toast } from '$lib/stores';
 	import { goto } from '$app/navigation';
-	import { getPreOpReading, getReadingArray, isPostOp } from '$lib/utils/utils';
+	import { getPreOpReading, getReadingArray, isPostOp, mapDiffToReading } from '$lib/utils/utils';
+	import { ReadingDiff } from '$lib/models/models';
 
 	export let data: PageData;
 
 	$: patient = data.patient;
-	$: reading = getReadingArray(patient.reading);
-	$: preOpReading = getPreOpReading(reading, patient.case_date);
-	$: preOpIop = preOpReading ? preOpReading['iop'] : null;
-	$: preOpMeds = preOpReading ? preOpReading['medication'] : null;
-
-	const redirectFrom = $page.url.searchParams.get('redirectFrom');
-
-	const toast = getContext<Writable<Toast>>('toast');
-
-	if (redirectFrom === 'editReading') {
-		const recordDate = new Date($page.url.searchParams.get('date') ?? '');
-		toast.set({
-			hasMessage: true,
-			message: `Updated IOP Reading from ${recordDate.toDateString()}`
-		});
-	}
-
-	let showConfirmDelete = false;
-
-	const toggleShowConfirmDelete = () => {
-		showConfirmDelete = !showConfirmDelete;
-	};
 
 	const handleAddReading = () => goto(`/patient/${patient?.id}/reading/add`);
+
+	const getPreOpIop = (patient: { operation_date: string }, iop_readings: { date: string, mmhg: number }[]) => iop_readings
+	.find(reading => reading.date < patient.operation_date);
+
+	const getPreOpMed = (patient: { operation_date: string }, medication_readings: { date: string, quantity: number }[]) => medication_readings
+	.find(reading => reading.date < patient.operation_date);
+
+	$: preOpIop = getPreOpIop(patient, patient?.iop_readings);
+	$: preOpMed = getPreOpMed(patient, patient?.medication_readings);
 </script>
 
 <main class="container-fluid grid">
@@ -50,19 +34,19 @@
 				<tr>
 					<td> Case Date </td>
 					<td>
-						{patient.case_date}
+						{patient.operation_date}
 					</td>
 				</tr>
 				<tr>
 					<td> Pre-Op IOP </td>
 					<td>
-						{preOpIop ?? 'N/A'}
+						{preOpIop ? preOpIop.mmhg : 'N/A'}
 					</td>
 				</tr>
 				<tr>
 					<td> Pre-Op Meds </td>
 					<td>
-						{preOpMeds ?? 'N/A'}
+						{preOpMed ? preOpMed.quantity : 'N/A'}
 					</td>
 				</tr></tbody
 			>
@@ -77,9 +61,7 @@
 				<header>
 					<h3>IOP and Meds</h3>
 				</header>
-				<PatientReadingGraph reading={
-					reading.filter(reading => isPostOp(reading, patient.case_date))
-				} />
+				<PatientReadingGraph {patient} />
 			</section>
 		{:else}
 			<section>
@@ -91,22 +73,6 @@
 			</section>
 		{/if}
 	</section>
-	<dialog open={showConfirmDelete}>
-		<article>
-			<header>
-				<h2>Confirm Delete</h2>
-			</header>
-			<p>Are you sure you want to delete this patient?</p>
-			<form action="?/deletePatient" method="post">
-				<input type="hidden" name="name_last" value={patient.name_last} />
-				<input type="hidden" name="name_first" value={patient.name_first} />
-				<button type="submit">Delete</button>
-			</form>
-			<footer>
-				<button on:click={toggleShowConfirmDelete}>Cancel</button>
-			</footer>
-		</article>
-	</dialog>
 </main>
 
 <style lang="scss">

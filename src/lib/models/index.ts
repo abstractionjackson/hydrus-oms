@@ -1,3 +1,4 @@
 export {
-    IntervalMap
+    IntervalMap,
+    ReadingDiff
 } from './models';

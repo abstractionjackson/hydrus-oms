@@ -16,7 +16,7 @@
 			<input type="hidden" name="case_date" value={patient?.case_date} />
 			<label for="date">Date</label>
 			<input type="date" name="date" id="date" placeholder="Date" required />
-			<label for="iop">Interocular Pressure (mmHg)</label>
+			<label for="iop">Intraocular Pressure (mmHg)</label>
 			<input type="number" name="iop" id="iop" required />
 			<label for="iop">Medication Amount</label>
 			<input type="number" name="medication" id="medication" required />

@@ -34,41 +34,187 @@ export interface Database {
   }
   public: {
     Tables: {
+      iop_reading: {
+        Row: {
+          date: string
+          id: number
+          mmHG: number
+          patient_id: number
+        }
+        Insert: {
+          date: string
+          id?: number
+          mmHG: number
+          patient_id: number
+        }
+        Update: {
+          date?: string
+          id?: number
+          mmHG?: number
+          patient_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "iop_reading_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "patient"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      iop_readings: {
+        Row: {
+          date: string
+          id: string
+          mmhg: number
+          patient_id: string
+        }
+        Insert: {
+          date: string
+          id?: string
+          mmhg: number
+          patient_id: string
+        }
+        Update: {
+          date?: string
+          id?: string
+          mmhg?: number
+          patient_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "iop_readings_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      medication_reading: {
+        Row: {
+          date: string
+          id: number
+          patient_id: number
+          quantity: number
+        }
+        Insert: {
+          date: string
+          id?: number
+          patient_id: number
+          quantity: number
+        }
+        Update: {
+          date?: string
+          id?: number
+          patient_id?: number
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "medication_reading_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "patient"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      medication_readings: {
+        Row: {
+          date: string
+          id: string
+          patient_id: string
+          quantity: number
+        }
+        Insert: {
+          date: string
+          id?: string
+          patient_id: string
+          quantity: number
+        }
+        Update: {
+          date?: string
+          id?: string
+          patient_id?: string
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "medication_readings_patient_id_fkey"
+            columns: ["patient_id"]
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       patient: {
         Row: {
-          case_date: string
           created_at: string
           dob: string
           id: number
           name_first: string
           name_last: string
           od_os: string[]
-          user: string
+          operation_date: string
+          user_id: string
         }
         Insert: {
-          case_date: string
           created_at?: string
           dob: string
           id?: number
           name_first: string
           name_last: string
           od_os: string[]
-          user?: string
+          operation_date: string
+          user_id?: string
         }
         Update: {
-          case_date?: string
           created_at?: string
           dob?: string
           id?: number
           name_first?: string
           name_last?: string
           od_os?: string[]
-          user?: string
+          operation_date?: string
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "patient_user_fkey"
-            columns: ["user"]
+            foreignKeyName: "patient_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      patients: {
+        Row: {
+          dob: string
+          id: string
+          name_first: string
+          name_last: string
+          operation_date: string
+          user_id: string
+        }
+        Insert: {
+          dob: string
+          id?: string
+          name_first: string
+          name_last: string
+          operation_date: string
+          user_id: string
+        }
+        Update: {
+          dob?: string
+          id?: string
+          name_first?: string
+          name_last?: string
+          operation_date?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patients_user_id_fkey"
+            columns: ["user_id"]
             referencedRelation: "users"
             referencedColumns: ["id"]
           }

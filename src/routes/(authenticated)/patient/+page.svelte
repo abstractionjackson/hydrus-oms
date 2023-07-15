@@ -26,19 +26,13 @@
 			<SearchPatients />
 		</header>
 		<button on:click={() => goto('/patient/add')}>Add Patient</button>
-		<details>
+		<details open={true}>
 			<summary>Patient List</summary>
 			<PatientList {patients} />
 		</details>
 	</section>
 	<section>
 		<h3>IOP and Medication Averages</h3>
-		<PatientGraph patients={patients.map(patient => {
-			return {
-				...patient,
-				reading: patient.reading
-			}
-		})} />
 	</section>
 </main>
 

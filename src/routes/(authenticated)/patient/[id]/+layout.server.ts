@@ -1,12 +1,13 @@
 import { error as layoutError } from '@sveltejs/kit'
 import type { LayoutServerLoad } from './$types';
+import type { Patient } from '$types';
 
 export const load = (async ({ locals: { supabase }, params, depends }) => {
 	depends('supabase:reading');
 	const { id } = params;
 	const { data, error } = await supabase
-		.from('patient')
-		.select('*, reading(*)')
+		.from('patients')
+		.select('*, iop_readings ( * ), medication_readings ( * )')
 		.eq('id', id)
 		.single();
 	if (error) {
@@ -19,5 +20,5 @@ export const load = (async ({ locals: { supabase }, params, depends }) => {
 			}
 		)
 	}
-	return { patient: data };
+	return { patient: data as Patient };
 }) satisfies LayoutServerLoad;

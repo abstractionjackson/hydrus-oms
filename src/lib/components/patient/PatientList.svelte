@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Patient } from '$lib/types';
+	import type { Patient } from '$types';
 
 	export let patients: Patient[];
 </script>

@@ -2,5 +2,6 @@ export {
     getReadingInterval,
     formatInterval,
     getPatientsIntervalMap,
-    getPreviousDate
+    getPreviousDate,
+    getPatientReadingAverages
 } from './utils';

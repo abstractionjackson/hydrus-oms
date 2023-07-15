@@ -1,4 +1,4 @@
-import type { HOMSInterval, Patient, Reading } from '$types';
+import type { HOMSInterval, Patient, Reading, ReadingDiff } from '$types';
 import { HOMS_INTERVAL } from '$lib/constants';
 import { DateTime, Interval } from 'luxon';
 import { IntervalMap } from '$lib/models';
@@ -69,8 +69,12 @@ export function isPostOp(reading: Pick<Reading, "date">, case_date: string) {
 export function getPreOpReading(
 	reading: Reading[],
 	case_date: string
-): Reading | undefined {
-	return reading.find((reading) => !isPostOp(reading, case_date)) as Reading;
+): Reading {
+	const preOpReading = reading.find((reading) => !isPostOp(reading, case_date));
+	if (!preOpReading) {
+		throw new Error('No pre-op reading found');
+	}
+	return preOpReading;
 };
 export function getReadingArray(reading: Reading | Reading[] | null | undefined) {
 	if(!reading) {
@@ -81,4 +85,31 @@ export function getReadingArray(reading: Reading | Reading[] | null | undefined)
 		return reading
 	}
 
+};
+
+export 	function getPatientReadingAverages(intervalMap: IntervalMap, key: 'iop' | 'medication'): number[] {
+	const averages: number[] = [];
+	for (const [interval, value] of intervalMap.entries()) {
+		if (value.length === 0) continue;
+		const averageIop =
+			value.reduce((acc: number, reading: Reading) => acc + reading[key], 0) /
+			value.length;
+		averages.push(averageIop);
+	}
+	return averages;
+};
+
+type MapDiffToReadingParams = {
+	reading: Reading,
+	readingDiff: ReadingDiff
+}
+export function mapDiffToReading({
+	reading,
+	readingDiff,
+}: MapDiffToReadingParams): Reading & Pick<ReadingDiff, "iopDelta" | "medicationDelta"> {
+	return {
+		...reading,
+		iopDelta: readingDiff.iopDelta,
+		medicationDelta: readingDiff.medicationDelta,
+	};
 }

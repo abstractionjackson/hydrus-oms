@@ -62,7 +62,7 @@ as permissive
 for all
 to authenticated
 using ((auth.uid() = ( SELECT patient."user"
-   FROM patient
+   from patient
   WHERE (reading.patient = patient.id))))
 with check (true);
 

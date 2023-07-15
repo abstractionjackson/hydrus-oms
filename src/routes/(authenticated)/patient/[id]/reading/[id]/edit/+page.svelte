@@ -18,7 +18,7 @@
 		<form method="post">
 			<label for="date">Date</label>
 			<input type="date" name="date" id="date" placeholder="Date" required bind:value={date} />
-			<label for="iop">Interocular Pressure (mmHg)</label>
+			<label for="iop">Intraocular Pressure (mmHg)</label>
 			<input type="number" name="iop" id="iop" placeholder="IOP" required bind:value={iop} />
 			<input type="submit" value="Save" />
 		</form>

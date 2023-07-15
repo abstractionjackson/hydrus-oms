@@ -2,8 +2,11 @@
 import type { Interval } from 'luxon';
 import type { Database } from './DatabaseDefinitions';
 
-export type Patient = Omit<Database['public']['Tables']['patient']['Row'], 'created_at'>;
-export type Reading = Omit<Database['public']['Tables']['reading']['Row'], 'created_at'>;
+export type Patient = Database['public']['Tables']['patients']['Row']
+& {
+	iop_readings: Database['public']['Tables']['iop_readings']['Row'][],
+	medication_readings: Database['public']['Tables']['medication_readings']['Row'][]
+};
 export type HOMSInterval =
 	| 'Pre-Op'
 	| 'One Day'
